@@ -6,7 +6,6 @@ const Logo = ()=>{
   return(
     <section>
       <div className="logo">
-        <img className="imgLogo" src="./assets/logo.png" style={{width: '8vw', minWidth: '60px'}} alt="logo"/>
         <Mytinerary/>
       </div>
     </section>

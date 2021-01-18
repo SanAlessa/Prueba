@@ -1,4 +1,14 @@
+
+import Header from '../components/Header'
+
 const Cities = () => {
-  return <h1>HOLA SOY LA CITIES</h1>
+  return(
+    <>
+    <Header/>
+    <h1> Soy la Cities </h1> 
+    </>
+  )
+
+
 }
 export default Cities

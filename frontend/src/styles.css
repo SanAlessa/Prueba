@@ -16,8 +16,29 @@ div#root {
   justify-content: space-between;
 }
 
+/* Estilos del HERO */
+.hero-image {
+  /* backgr ound-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); */
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 2vh;
+}
+
+.hero-text {
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+}
+
 /* Estilos del header */
 header {
+  position: sticky;
+  top: 0;
   display: flex !important;
   justify-content: space-between;
   align-items: center;
@@ -44,7 +65,7 @@ header {
 /* Estilos del logo y su contenido */
 .logo {
   margin: 1vh auto;
-  width: 40vw;
+  width: 50vw;
   display: flex;
   align-items: center;
   justify-content: center;

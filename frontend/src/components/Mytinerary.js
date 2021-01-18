@@ -3,14 +3,11 @@
 const Mytinerary = () => {
   return(
     <div className="infoLogo">
-      <h1 style={{color: 'orange', fontSize: '7vh', textAlign: 'center'}}>MYtinerary</h1>
-      <div className="divIconos">
-          <i className="fas fa-music"></i>
-          <i className="fas fa-plane-departure"></i>
-          <i className="fas fa-hotel"></i>
-          <i className ="fas fa-umbrella-beach"></i>
-        </div>
-      <p style={{fontSize: '2vh', textAlign: 'center'}}>Find your perfect trip, designed by insiders who know and love their cities</p>
+      <div style={{display: 'flex', justifyContent: 'center'}} > 
+        <img className="imgLogo" src="./assets/logo.png" style={{width: '6vw', minWidth: '60px', marginRight: '2vw'}} alt="logo"/>
+        <h1 style={{color: 'orange', fontSize: '10vh', textAlign: 'center'}}>MYtinerary</h1>
+      </div>
+      <p style={{fontSize: '4vh', textAlign: 'center'}}>Find your perfect trip, designed by insiders who know and love their cities</p>
     </div>
   )
 }
