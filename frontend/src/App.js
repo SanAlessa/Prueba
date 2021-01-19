@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Footer from './components/Footer'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Cities from './pages/Cities'
-import Itinerary from './components/Itinerary'
+import Itineraries from './components/Itineraries'
 
 function App() {
 return (
@@ -13,8 +13,8 @@ return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route exact path="/cities/" component={Cities}/>
-        <Route path="/cities/:id" component={Itinerary}/>
+        <Route exact path="/cities" component={Cities}/>
+        <Route path="/cities/:id" component={Itineraries}/>
         <Redirect to="/"/>
       </Switch>
       <Footer/>

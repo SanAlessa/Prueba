@@ -1,28 +1,21 @@
-import React, {useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
+import Header from './Header'
+import { useEffect, useState } from "react"
 
+const Itineraries =(props)=> {
+  const [itineraries, setItineraries] = useState({})
 
-const Itineraries =()=>{
-  const [ciudades, setCiudades] = useState([])
+  useEffect(()=> {
+    const id = parseInt(props.match.params.id)
+    fetch(`http://localhost:4000/api/cities/${id}`)
+    .then(response => response.json())
+    .then(data => setItineraries(data.response))
+  })
 
-  useEffect(()=>{
-    fetch('http://localhost:4000/api/cities')
-    .then(response=> response.json())
-    .then(data => setCiudades(data.response))
-
-
-  }, [])
-  return(
-    ciudades.map(({src, titulo, id}) => {
-      return (
-        <Link className="toItinerary" to={`/cities/${id}`}>
-          <div key={id} className="city" style={{backgroundImage: `url("${src}")`}}>
-            <h5>{titulo}</h5> 
-          </div>
-        </Link>
-      )
-    })
+  return (
+    <>
+    <Header/>
+    <h2>{itineraries.titulo}</h2>
+    </>
   )
 }
-
 export default Itineraries
