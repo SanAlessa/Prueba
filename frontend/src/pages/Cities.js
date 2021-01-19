@@ -1,11 +1,13 @@
-
 import Header from '../components/Header'
+import Itineraries from '../components/Itineraries'
 
 const Cities = () => {
   return(
     <>
     <Header/>
-    <h1> Soy la Cities </h1> 
+    <div className="cities">
+      <Itineraries/>
+    </div>
     </>
   )
 

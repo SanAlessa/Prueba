@@ -57,7 +57,7 @@ const Example = (props) => {
         onExited={() => setAnimating(false)}
         key={numero++}
       > 
-      <Fotos key={numero+=2} fotos={fotos}/>
+      <Fotos fotos={fotos}/>
       </CarouselItem>
     );
   });
