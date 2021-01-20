@@ -10,6 +10,7 @@ const Cities = () => {
   fetch('http://localhost:4000/api/cities')
   .then(response=> response.json())
   .then(data => {
+    console.log(data.response[0].cityPic)
     setCiudades(data.response)
     setAFiltrar(data.response)
   })
@@ -18,7 +19,7 @@ const Cities = () => {
   const leerInput = (e) => {
     var valor = e.target.value
     const filtroCiudades = aFiltrar.filter(ciudad =>{
-      return ciudad.titulo.toUpperCase().indexOf(valor.toUpperCase()) === 0
+      return ciudad.cityName.toUpperCase().indexOf(valor.toUpperCase()) === 0
     })
     setCiudades(filtroCiudades)
   }
@@ -32,11 +33,11 @@ const Cities = () => {
       <input autoComplete="off" className="input" onChange={leerInput} type="text" name="nombre" 
         placeholder="Which cities are you looking for?" />
       <div className="cities">
-      {ciudades.map(({src, titulo, id}) => {
+      {ciudades.map(({cityPic, cityName, _id}) => {
         return (
-          <Link key={id} className="toItinerary" to={`/cities/${id}`}>
-            <div className="city" style={{backgroundImage: `url("${src}")`}}>
-              <h5>{titulo}</h5> 
+          <Link key={_id} className="toItinerary" to={`/cities/${_id}`}>
+            <div className="city" style={{backgroundImage: `url("${cityPic}")`}}>
+              <h5>{cityName}</h5> 
             </div>
           </Link>
         )
