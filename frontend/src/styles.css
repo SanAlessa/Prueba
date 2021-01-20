@@ -45,6 +45,7 @@ header {
   height: 10vh;
   background-color: #d4fdee;
   border-radius: 50px;
+  margin-bottom: 1vh;
 }
 .imgLogIn{
   align-self: center;
@@ -210,15 +211,30 @@ div.active{
 }
 
 /* Estilos de Cities */
+.hCities {
+  text-align: center
+}
+
 .cities {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
+.input {
+  text-align: center;
+  margin: 2vh;
+  width: 80vw;
+  border: none;
+  border-bottom: 1px solid blue;
+  padding: 1vh;
+  outline: none;
+
+}
+
 .city{
   width: 80vw;
-  height: 30vh;
+  height: 40vh;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -235,6 +251,32 @@ div.active{
 
 a.toItinerary {
   text-decoration: none !important;
+}
+
+/* Estilos de Itineraries */
+.divItineraries {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2vh;
+}
+
+
+.notItineraries {
+  width: 60vw;
+  height: 30vh;
+  border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #2a7cff;
+  margin: ;
+}
+
+.notItineraries>h2 {
+  text-align: center;
+  margin-top: 8vh;
 }
 
 /* Estilos del FOOTER */
