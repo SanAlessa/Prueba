@@ -1,26 +1,31 @@
-import Header from './Header'
 import { useEffect, useState } from "react"
-
+import CityHeader from './CityHeader'
+import { Link } from "react-router-dom";
 const Itineraries =(props)=> {
   const [itineraries, setItineraries] = useState({})
   
   const id = props.match.params.id
-  console.log(id)
-  
+
   useEffect(()=> {
     fetch(`http://localhost:4000/api/cities/${id}`)
     .then(response => response.json())
     .then(data => setItineraries(data.response))
+    .catch(error => console.log(error))
   }, [id])
 
   return (
     <>
-    <Header/>
-    <div className="divItineraries">
-      <h2>{itineraries.cityName}</h2>
-      <div className="notItineraries" style={{backgroundImage: 'url("../assets/banner.jpg")'}}>
-        <h2>We dont have any itineraries yet, be the first!</h2>
-      </div>
+    <CityHeader itineraries={itineraries}/>
+    <div className="divItineraries" style={{backgroundImage: 'url("https://cdn.pixabay.com/photo/2017/06/26/08/43/ribblehead-viaduct-2443085__340.jpg")'}}>
+      <h2>We dont have any itineraries yet, be the first!</h2>
+    </div>
+    <div className="goBackCities" style={{backgroundImage: 'url("../assets/search.jpg")'}}>
+      <Link to="/cities">
+        <div className="prueba">
+          <h5 className="goBack">Do you want to see more itineraries? GO BACK!</h5>
+          <img src="../assets/goback1.png" alt="arrow to left"/>
+        </div>
+      </Link>
     </div>
     </>
   )

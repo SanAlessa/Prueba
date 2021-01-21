@@ -3,10 +3,10 @@ const router = express.Router()
 const cityController = require('../controllers/cityController')
 
 router.route('/cities')
-.get(cityController.allItineraries)
+.get(cityController.allCities)
 .post(cityController.addCity)
 
-router.route('/city/:id')
-.get(cityController.eachItinerary)
+router.route('/cities/:id')
+.get(cityController.eachCity)
 
 module.exports = router
