@@ -1,14 +1,14 @@
-import Header from '../components/Header'
+import SemiHero from '../components/SemiHero'
 import React, {useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
-// import City from '../components/City'
+import City from '../components/City'
 
+
+// Componente correspondiente a la pagina Cities que va a llamar a los respectivos componentes.
 const Cities = () => {
   const [inputValue, setInputValue] = useState('')
   const [ciudades, setCiudades] = useState([])
   const [aFiltrar, setAFiltrar] = useState([])
   const [loading, setLoading] = useState(true)
-
 
   useEffect(()=>{
   fetch('http://localhost:4000/api/cities')
@@ -19,50 +19,21 @@ const Cities = () => {
     setLoading(false)
   })
   .catch(error => console.log(error))
+  window.scrollTo(0,0)
   },[])
 
+  // Filtro para poder buscar diferentes ciudades.
   useEffect(()=>{
-    setAFiltrar(ciudades.filter(ciudad => ciudad.cityName.toUpperCase().indexOf(inputValue.toUpperCase().trim()) === 0))
-  },[inputValue])
+    setAFiltrar(ciudades.filter(ciudad => ciudad.cityName.toUpperCase().indexOf(inputValue.toUpperCase()) === 0))
+  },[inputValue, ciudades])
 
   return(
     <>
-    <Header/>
-    <div className="divTitleImg">
-      <img src="../assets/avion2.png" alt="avion" className="avionL" style={{width: '30vw'}} />
-      <h1 className="hCities">CITIES</h1>
-      <img src="../assets/avion.png" alt="avion" className="avionR" style={{width: '30vw'}} />
-    </div>
+    <SemiHero/>
     <section className="cities">
       <input autoComplete="off" className="input" onChange={(e)=>setInputValue(e.target.value)} type="text" name="nombre" 
-        placeholder="Which cities are you looking for?" />
-      <div className="cities">
-        {aFiltrar.length > 0 
-        ? (
-          aFiltrar.map(({cityPic, cityName, _id}) => {
-            return (
-              <Link key={_id} className="toItinerary" to={`/cities/${_id}`}>
-              <div className="city" style={{backgroundImage: `url("${cityPic}")`}}>
-                <h5>{cityName}</h5> 
-              </div>
-            </Link>
-              // <City cityPic={cityPic} cityName={cityName} id={_id} />
-            )
-          })
-        )
-        : (
-          <h1>NO HAY CIUDADES</h1>
-        )}
-      {/* {aFiltrar.map(({cityPic, cityName, _id}) => {
-        return (
-          <Link key={_id} className="toItinerary" to={`/cities/${_id}`}>
-            <div className="city" style={{backgroundImage: `url("${cityPic}")`}}>
-              <h5>{cityName}</h5> 
-            </div>
-          </Link>
-        )
-      })} */}
-      </div>
+        placeholder='Search Cities' style={{fontSize: '2.5vh'}} />
+      <City aFiltrar={aFiltrar} loading={loading}/>
     </section>
     </>
   )

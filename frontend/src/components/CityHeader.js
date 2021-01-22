@@ -32,7 +32,7 @@ const CityHeader = ({itineraries}) => {
         <img className="imgLogIn" style={{width: '5vw', minWidth: '60px'}} src="../assets/login1.png" alt="Login img"></img>
       </div>
       <div className="hero-text-city" style={{color: 'white'}}>
-        <h3>{cityName}</h3>
+        <h1>{cityName}</h1>
       </div>
     </div>
     <div className="borderPic"></div>

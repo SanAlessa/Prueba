@@ -11,6 +11,7 @@ const Itineraries =(props)=> {
     .then(response => response.json())
     .then(data => setItineraries(data.response))
     .catch(error => console.log(error))
+    window.scrollTo(0, 0)
   }, [id])
 
   return (

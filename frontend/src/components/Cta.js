@@ -11,7 +11,7 @@ const Cta = () => {
           <h3>Looking for itineraries?</h3>
         </div>
           <div className="imgShow">
-            <img src="./assets/pointing.jpg" style={{width: '20vw'}} alt="ponting"/>
+            <img src="./assets/pointing1.png" style={{width: '20vw'}} alt="ponting"/>
             <Link to="/cities"><button className="showMore">Show Me!</button></Link>
           </div>
       </div>

@@ -27,12 +27,9 @@ div#root {
 .hero-image-city {
   height: 50vh;
 }
-.cityHeader {
-  display: flex;
-  justify-content: space-between;
-}
-.cityHeader a {
-  color: white;
+
+.imgLogo {
+  align-self: center;
 }
 
 .cityHeader a:hover {
@@ -49,9 +46,7 @@ div#root {
 }
 
 /* Estilos del header */
-header {
-  position: sticky;
-  top: 0;
+.header {
   display: flex !important;
   justify-content: space-between;
   align-items: center;
@@ -59,13 +54,31 @@ header {
   background-color: #d4fdee;
   border-radius: 50px;
   margin-bottom: 1vh;
+  position: fixed;
+  width: 100%;
 }
+
+.principalHeader{
+  display: flex;
+  position: sticky;
+  top: 0;
+  justify-content: space-between;
+}
+.cityHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.principalHeader a, .cityHeader a{
+  color: white;
+}
+
 .imgLogIn{
   align-self: center;
   padding-top: 0.5vh;
   padding-bottom: 1vh;
   margin-right: 0.5vw;
 }
+
 
 .navbar-toggler {
   border-radius: 50px !important;
@@ -125,7 +138,7 @@ i {
   font-weight: bold;
 }
 
-.showMore {
+.showMore, .clickHere {
   cursor: pointer;
   border: none;
   font-family: 'Varela Round', sans-serif;
@@ -165,7 +178,7 @@ i {
   position: absolute;
   width: 46vw;
   height: 3px;
-  background-color: black;
+  background-color: black !important;
   top: calc(50% - 2px);
   left: -12vw;
   z-index: -1
@@ -227,6 +240,8 @@ div.active{
 
 .cities {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
 }
@@ -239,11 +254,12 @@ div.active{
   border-bottom: 3px solid #2a7cff;
   border-radius: 3px;
   padding: 1vh;
-  outline: none;
-
+  outline: none;  
+  font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+  background-color: whitesmoke;
 }
 
-.city{
+.city, .oops{
   width: 80vw;
   height: 40vh;
   background-position: center;
@@ -254,32 +270,65 @@ div.active{
   color: white;
   display: flex;
   align-items: flex-end;
+  box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.623);
 }
 
 .city>h5 {
+ background-color: rgba(0, 0, 0, 0.281);
+  border-radius: 50px;
   margin-left: 2vw;
+  font-size: 3vh;
 }
 
 .divTitleImg {
-  margin-top: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 15vh;
+  height: 20vh;
 }
 
 .avionL {
-  margin-right: -7vw;
+  margin-right: -6vw;
   padding-top: 7vh;
 }
 
 .avionR {
-  margin-left: -7vw;
+  margin-left: -6vw;
   padding-top: 7vh;
 }
 
 a.toItinerary {
   text-decoration: none !important;
+}
+
+.oops {
+  color: black;
+  align-items: center;
+  justify-content: center;
+}
+.oopsContent {
+  background-color: rgba(255, 255, 255, 0.795);
+  width: 100vw;
+  text-align: center;
+}
+.oops h4 {
+  justify-content: center;
+}
+.oopsCta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5vh;
+}
+.clickHere {
+  outline: none !important;
+  background-color: #2a7cff;
+}
+.clickHere:hover{
+  border: 2px solid #2a7cff;
+  background-color: white;
+  color: #2a7cff;
 }
 
 /* Estilos de Itineraries */

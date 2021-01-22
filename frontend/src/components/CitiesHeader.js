@@ -1,6 +1,3 @@
-// Componente encargado del header con su navbar.
-
-import PathComparator from './PathComparator'
 import React, { useState } from 'react';
 import {
   Collapse,
@@ -11,15 +8,11 @@ import {
 } from 'reactstrap';
 import { NavLink } from "react-router-dom";
 
-const Header = (props)=>{
+const CitiesHeader = (props)=>{
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  
   return (
-    <>
-    {/* LLAMA AL COMPARADOR DE RUTA */}
-    <PathComparator/>
-    <div id="header" className="principalHeader">
+    <div>
       <Navbar color="faded" light expand="md">
         <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
@@ -34,11 +27,10 @@ const Header = (props)=>{
             </Collapse>
         </Navbar>
         <div>
-          <img id="logo" src="../assets/logo.png" alt="logo" style={{visibility: 'hidden', width: '4vw', marginLeft: '-5vw', minWidth: '0px'}}/>
+          <img src="../assets/logo.png" alt="logo" style={{width: '4vw', marginLeft: '-5vw', minWidth: '0px'}}/>
         </div>
-        <img className="imgLogIn" id="imgLogin" style={{width: '5vw', minWidth: '60px'}} src="../assets/login1.png" alt="Login img" />
+        <img className="imgLogIn" style={{width: '5vw', minWidth: '60px'}} src="../assets/login.png" alt="Login img" />
     </div>
-    </>
   )
 }
-export default Header
+export default CitiesHeader
