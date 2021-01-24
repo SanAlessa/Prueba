@@ -34,7 +34,7 @@ const Header = (props)=>{
             </Collapse>
         </Navbar>
         <div>
-          <img id="logo" src="../assets/logo.png" alt="logo" style={{visibility: 'hidden', width: '4vw', marginLeft: '-5vw', minWidth: '0px'}}/>
+          <img id="logo" src="../assets/logo.png" alt="logo" style={{visibility: 'hidden', width: '4vw', marginLeft: '-5vw', minWidth: '50px'}}/>
         </div>
         <img className="imgLogIn" id="imgLogin" style={{width: '5vw', minWidth: '60px'}} src="../assets/login1.png" alt="Login img" />
     </div>

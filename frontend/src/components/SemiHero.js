@@ -1,3 +1,5 @@
+// SemiHero con las propiedades para la pagina Cities.
+
 import Header from "./Header";
 
 const SemiHero =()=>{

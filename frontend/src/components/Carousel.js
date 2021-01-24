@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import Images from './Images'
 import {
   Carousel,
   CarouselItem,
   CarouselControl
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Fotos from './Fotos'
+
 
 
 // Componente que crea el Carousel con su slide y componentes.
@@ -50,14 +51,14 @@ const Example = (props) => {
 
 
   var numero = 0
-  const slides = items.map(fotos => {
+  const slides = items.map(images => {
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
         key={numero++}
       > 
-      <Fotos fotos={fotos}/>
+      <Images images={images}/>
       </CarouselItem>
     );
   });

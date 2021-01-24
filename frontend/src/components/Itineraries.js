@@ -1,7 +1,8 @@
+// Pagina itineraries para cada ciudad donde se ejecuta el header de la misma y el cta GoBack.
+
 import { useEffect, useState } from "react"
 import CityHeader from './CityHeader'
 import GoBack from './GoBack';
-import Preloader from "./Preloader";
 
 const Itineraries =(props)=> {
   const [itineraries, setItineraries] = useState({})
@@ -24,14 +25,6 @@ const Itineraries =(props)=> {
       <h2>We dont have any itineraries yet, be the first!</h2>
     </div>
     <GoBack/>
-    {/* <div className="goBackCities" style={{backgroundImage: 'url("../assets/search.jpg")'}}>
-      <Link to="/cities">
-        <div className="prueba">
-          <h5 className="goBack">Do you want to see more itineraries? GO BACK!</h5>
-          <img src="../assets/goback1.png" alt="arrow to left"/>
-        </div>
-      </Link>
-    </div> */}
     </>
   )
 }

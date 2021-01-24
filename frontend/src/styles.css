@@ -29,7 +29,7 @@ div#root {
 }
 
 .imgLogo {
-  align-self: center;
+  align: se;lf: center;
 }
 
 .cityHeader a:hover {
@@ -372,8 +372,10 @@ a.toItinerary {
 }
 
 .goBackCities {
-  margin: 3vh auto;
-  width: 40vw;
+  display: flex;
+  justify-content: center;
+  margin: 2vh auto;
+  width: 70vw;
   height: 60vh;
   background-position: center;
   background-size: cover;
@@ -381,8 +383,11 @@ a.toItinerary {
   border-radius: 100%;
   outline: none;
   position: relative;
+  align-self: center;
 }
-
+.imgGoBack {
+  margin: 1vh auto 0vh auto;
+}
 .goBackCities a {
   color: black;
 }
@@ -398,15 +403,21 @@ a.toItinerary {
   margin-left: 8vw;
 }
 
-.prueba:hover {
+.divGoBack:hover {
   transform: translateX(-1.5vw);
   transition: 0.4s;
 }
 
-.goBackCities img {
-  width: 5vw;
+.divGoBack {
+  width: 25vw;
   position: absolute;
   right: 10vw;
+}
+
+.divGoBack > img {
+  width: 6vw;
+  position: absolute;
+  right: 7vw;
 }
 
 .borderPic {
@@ -445,19 +456,19 @@ a.toItinerary {
   background: none;
 }
 .ldio-mkynfyfi3c {
-  margin-top: 5vh;
   width: 100%;
   height: 100%;
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  transform-origin: 0 0; 
 }
 .ldio-mkynfyfi3c div { box-sizing: content-box; }
 
 
 /* Estilos del FOOTER */
 .footer {
+  margin-top: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;

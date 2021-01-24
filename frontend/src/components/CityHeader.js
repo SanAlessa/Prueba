@@ -1,3 +1,5 @@
+// Componente encargado del Header de cada pagina correspondiente a cada ciudad.
+
 import React, { useState } from 'react';
 import {
   Collapse,

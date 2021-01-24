@@ -1,8 +1,10 @@
-const Foto = ({foto}) => {
-  const {src, titulo} = foto
+// Componente que cse encarga de crear cada card para el carousel.
+
+const Image = ({image}) => {
+  const {src, titulo} = image
   return (
     <>
-      <div key={foto.titulo} className="imagenesCarousel" style={{
+      <div key={image.titulo} className="imagenesCarousel" style={{
         backgroundImage: `url("${src}")`,
         width: '20vw',
         height: '25vh',
@@ -14,4 +16,4 @@ const Foto = ({foto}) => {
   )
 }
 
-export default Foto
+export default Image

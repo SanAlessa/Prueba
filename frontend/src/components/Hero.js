@@ -1,3 +1,5 @@
+// Hero correspondiente a la pagina de HOME
+
 import Logo from './Logo'
 import Header from './Header'
 const Hero = () => {
