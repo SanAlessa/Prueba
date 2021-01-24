@@ -1,14 +1,15 @@
 // componente que crea cada card de las ciudades.
 
 import { Link } from 'react-router-dom'
+import Preloader from './Preloader'
 
 const City =({aFiltrar, loading})=>{
-// Se verifica que este cargando la data
+// Se verifica que este cargando la data y se llama al componente con el Preloader
   if (loading) {
-    return <h1>CARGANDO...</h1>
+    return <Preloader/>
   }
   // Cuando no hay coincidencias con el filtro y la data ya esta cargada muestra una card especial.
-  if(aFiltrar.length === 0 && !loading){
+  if(aFiltrar.length === 0 ){
     return (
       <div style={{display: 'flex', flexDirection: 'column'}}>
         <div className="oops" style={{backgroundImage: 'url("../assets/oops.jpg'}}>
@@ -27,11 +28,14 @@ const City =({aFiltrar, loading})=>{
   // Cuando la data esta cargada genera las cards.
    return(
     <div className="cities">
-      {aFiltrar.map(({cityPic, cityName, _id})=> {
+      {aFiltrar.map(({cityPic, cityDescription, cityName, _id})=> {
          return(
           <Link key={_id} className="toItinerary" to={`/cities/${_id}`}>
             <div className="city" style={{backgroundImage: `url("${cityPic}")`}}>
-              <h5>{cityName}</h5> 
+              <div className="nameDescription">
+                <h5>{cityName}</h5>
+                <p>{cityDescription}</p>
+              </div>
             </div>
           </Link>
           )

@@ -4,10 +4,11 @@ const itineraryController = {
   // addCity es el encargado de añadir cada elemento a la base de datos
 
   addCity: (req, res) => {
-    const {cityName: title, cityPic: pic} = req.body
+    const {cityName, cityPic, cityDescription} = req.body
     const citySave = new City({
-      cityName: title,
-      cityPic: pic
+      cityName,
+      cityDescription,
+      cityPic
     })
     // tengo que grabar estas ciudades en esta instancia de mi modelo
     citySave.save()

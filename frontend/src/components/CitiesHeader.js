@@ -1,3 +1,5 @@
+// Header utilizado unicamente para la pagina Itineraries.
+
 import React, { useState } from 'react';
 import {
   Collapse,

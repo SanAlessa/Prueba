@@ -12,6 +12,7 @@ const CityHeader = ({itineraries}) => {
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const {cityPic, cityName} = itineraries
+  
   return (
     <>
     <div className="hero-image-city" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("${cityPic}")`}}>

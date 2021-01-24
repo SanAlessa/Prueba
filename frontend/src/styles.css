@@ -256,7 +256,6 @@ div.active{
   padding: 1vh;
   outline: none;  
   font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
-  background-color: whitesmoke;
 }
 
 .city, .oops{
@@ -273,12 +272,36 @@ div.active{
   box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.623);
 }
 
-.city>h5 {
- background-color: rgba(0, 0, 0, 0.281);
-  border-radius: 50px;
-  margin-left: 2vw;
+
+.nameDescription h5 {
+  display: inline;
+  background-color: rgba(0, 0, 0, 0.4);
   font-size: 3vh;
+  border-radius: 20px;
+  margin-left: 2vw;
 }
+
+.nameDescription p {
+  width: 70vw;
+  margin: 1vh 0vw 0.1vh 2vw;
+  opacity: 0;
+}
+
+.city:hover {
+  background-color: rgb(50,50,50);
+  background-blend-mode:soft-light;
+}
+
+.city:hover .nameDescription p {
+  margin-bottom: 5vh;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.city:hover .nameDescription h5 {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 
 .divTitleImg {
   display: flex;
@@ -395,6 +418,43 @@ a.toItinerary {
   border-bottom-right-radius: 50px;
   border-bottom-left-radius: 50px;
 }
+
+/* PRELOADER */
+@keyframes ldio-mkynfyfi3c {
+  0% { transform: translate(-50%,-50%) rotate(0deg); }
+  100% { transform: translate(-50%,-50%) rotate(360deg); }
+}
+.ldio-mkynfyfi3c div {
+  position: absolute;
+  width: 124px;
+  height: 124px;
+  border: 16px solid #2a7cff;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+.ldio-mkynfyfi3c div {
+  animation: ldio-mkynfyfi3c 1s linear infinite;
+  top: 100px;
+  left: 100px
+}
+.loadingio-spinner-rolling-024g0lu3r3e7 {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+.ldio-mkynfyfi3c {
+  margin-top: 5vh;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-mkynfyfi3c div { box-sizing: content-box; }
+
 
 /* Estilos del FOOTER */
 .footer {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import CityHeader from './CityHeader'
-import { Link } from "react-router-dom";
+import GoBack from './GoBack';
+import Preloader from "./Preloader";
+
 const Itineraries =(props)=> {
   const [itineraries, setItineraries] = useState({})
   
@@ -11,6 +13,7 @@ const Itineraries =(props)=> {
     .then(response => response.json())
     .then(data => setItineraries(data.response))
     .catch(error => console.log(error))
+
     window.scrollTo(0, 0)
   }, [id])
 
@@ -20,14 +23,15 @@ const Itineraries =(props)=> {
     <div className="divItineraries" style={{backgroundImage: 'url("https://cdn.pixabay.com/photo/2017/06/26/08/43/ribblehead-viaduct-2443085__340.jpg")'}}>
       <h2>We dont have any itineraries yet, be the first!</h2>
     </div>
-    <div className="goBackCities" style={{backgroundImage: 'url("../assets/search.jpg")'}}>
+    <GoBack/>
+    {/* <div className="goBackCities" style={{backgroundImage: 'url("../assets/search.jpg")'}}>
       <Link to="/cities">
         <div className="prueba">
           <h5 className="goBack">Do you want to see more itineraries? GO BACK!</h5>
           <img src="../assets/goback1.png" alt="arrow to left"/>
         </div>
       </Link>
-    </div>
+    </div> */}
     </>
   )
 }
