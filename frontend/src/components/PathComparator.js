@@ -2,7 +2,7 @@ const PathComparator =()=>{
 // COMPONENTE ENCARGADO DE HACER LAS COMPARACIONES CORRESPONDIENTES PARA CADA RUTA HACIENDO UN HEADER DINAMICO AL SCROLEAR
     window.onscroll = function(e){
       if(e.path[0].URL === 'http://localhost:3000/'){
-        if(window.scrollY > 870){
+        if(window.scrollY > 700){
           document.querySelector('#header').setAttribute('class', 'header')
           document.querySelector('#imgLogin').setAttribute('src', "../assets/login.png")
           document.querySelector('#logo').style.visibility = "visible"

@@ -3,7 +3,7 @@
 const Preloader =()=> {
   return (
     <>
-    <div className="loadingio-spinner-rolling-024g0lu3r3e7"><div class="ldio-mkynfyfi3c">
+    <div className="loadingio-spinner-rolling-024g0lu3r3e7"><div className="ldio-mkynfyfi3c">
     <div></div>
     </div></div>
     </>
