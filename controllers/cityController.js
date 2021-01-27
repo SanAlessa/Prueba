@@ -1,14 +1,12 @@
 const City = require('../models/City')
 
-const itineraryController = {
+const cityController = {
   // addCity es el encargado de añadir cada elemento a la base de datos
 
   addCity: (req, res) => {
     const {cityName, cityPic, cityDescription} = req.body
     const citySave = new City({
-      cityName,
-      cityDescription,
-      cityPic
+      cityName, cityDescription, cityPic
     })
     // tengo que grabar estas ciudades en esta instancia de mi modelo
     citySave.save()
@@ -28,7 +26,7 @@ const itineraryController = {
       return res.json({success: true, response: data})
     })
     .catch(error => {
-      return res.json({success: true, error: error})
+      return res.json({success: false, error: error})
     })
   },
 
@@ -43,7 +41,8 @@ const itineraryController = {
     .catch(error => {
       return res.json({success: false, error: error})
     })
-  }
+  },
+
 }
 
-module.exports = itineraryController
+module.exports = cityController

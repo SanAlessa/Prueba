@@ -26,10 +26,13 @@ div#root {
 }
 .hero-image-city {
   height: 50vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode:soft-light;
+
 }
 
 .imgLogo {
-  align: se;lf: center;
+  align-self: center;
 }
 
 .cityHeader a:hover {

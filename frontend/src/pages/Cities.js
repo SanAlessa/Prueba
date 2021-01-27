@@ -46,8 +46,8 @@ const Cities = () => {
         placeholder='Search Cities' style={{fontSize: '2.5vh'}} />
       {comparator()}
       <div className="cities">
-        {aFiltrar.map(({cityPic, cityDescription, cityName, _id})=> {
-          return <City key={_id} cityPic={cityPic} cityDescription={cityDescription} cityName={cityName} _id={_id} /> })}
+        {aFiltrar.map((ciudad)=> {
+          return <City key={ciudad._id} ciudad={ciudad} /> })}
       </div>
     </section>
     </>
