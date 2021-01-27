@@ -8,7 +8,7 @@ router.route('/cities')
 .post(cityController.addCity)
 
 router.route('/cities/:id')
-.get(cityController.eachCity)
+// .get(cityController.eachCity)
 .get(itineraryController.allItineraries)
 .post(itineraryController.addItinerary)
 
