@@ -358,7 +358,7 @@ a.toItinerary {
 }
 
 /* Estilos de Itineraries */
-.divItineraries {
+.divNoItineraries {
   margin: 2vh auto;
   width: 70vw;
   height: 34vh;
@@ -366,10 +366,38 @@ a.toItinerary {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  align-self: center;
   text-align: center;
   color: black;
 }
-
+.itinerary {
+  margin: 2vh auto;
+  width: 80vw;
+  border-radius: 50px;
+  text-align: center;
+  background-Color: lightblue;
+  display: flex;
+  flex-Direction: column;
+  justify-Content: space-evenly;
+}
+.itineraryContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.userImg {
+  width: 7vw;
+  height: 7vw; 
+  border-radius: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.itineraryInfo {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
 .divItineraries>h2 {
   margin-top: 6vh;
 }

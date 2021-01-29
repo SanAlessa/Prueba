@@ -1,18 +1,50 @@
-// componente que crea cada card de las ciudades.
+// Pagina itineraries para cada ciudad donde se ejecuta el header de la misma y el cta GoBack.
 
-import { Link } from 'react-router-dom'
+import { connect } from "react-redux";
+import { useEffect, useState } from "react"
+import CityHeader from './CityHeader'
+import GoBack from './GoBack';
+import itinerariesActions from "../redux/actions/itinerariesActions"
+import NoItineraries from '../components/NoItineraries'
+import Itineraries from '../components/Itineraries'
 
-const City =({ciudad})=>{
-  const {cityPic, cityDescription, _id, cityName} = ciudad
-  return(
-    <Link key={_id} className="toItinerary" to={`/cities/${_id}`}>
-      <div className="city" style={{backgroundImage: `url("${cityPic}")`}}>
-        <div className="nameDescription">
-          <h5>{cityName}</h5>
-          <p>{cityDescription}</p>
-        </div>
-      </div>
-    </Link>
+const City =(props)=> {
+  const [city, setCity] = useState({})
+  const id = props.match.params.id
+
+  useEffect(()=> {
+    var ciudad = props.oneCity.filter(city => city._id === id)
+    setCity(ciudad[0])
+    props.getItineraries(id)
+    window.scrollTo(0, 0)
+  }, [id])
+
+  const comparator=()=>{
+    if(props.allItineraries.length === 0){
+      return <NoItineraries/>
+    }
+  }
+
+  return (
+    <>
+    <CityHeader city={city}/>
+    {comparator()}
+    {props.allItineraries.map(itinerary => {
+      return <Itineraries key={itinerary._id} itinerary={itinerary}/>
+    })}
+    <GoBack/>
+    </>
   )
 }
-export default City
+
+const mapStateToProps = (state) => {
+  return {
+    oneCity: state.citiesR.cities,
+    allItineraries: state.itinerariesR.itineraries
+  }
+}
+const mapDispatchToProps = {
+  getItineraries: itinerariesActions.getItineraries
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(City)

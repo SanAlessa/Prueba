@@ -8,8 +8,16 @@ router.route('/cities')
 .post(cityController.addCity)
 
 router.route('/cities/:id')
-// .get(cityController.eachCity)
+.get(cityController.eachCity)
+
+router.route('/itineraries')
 .get(itineraryController.allItineraries)
 .post(itineraryController.addItinerary)
+
+router.route('/itineraries/:id')
+.get(itineraryController.itineraryByCity)
+
+router.route('/itinerary/:id')
+.put(itineraryController.updateItinerary)
 
 module.exports = router

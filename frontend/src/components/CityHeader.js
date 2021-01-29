@@ -10,10 +10,10 @@ import {
 } from 'reactstrap';
 import { NavLink } from "react-router-dom";
 
-const CityHeader = ({itineraries}) => {
+const CityHeader = ({city}) => {
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  const {cityPic, cityName} = itineraries
+  const {cityPic, cityName} = city
   
   return (
     <>
