@@ -1,3 +1,5 @@
+// Componente de los itinerarios que es llamado por el componente City. Cada itinerario creado de manera dinamica con sus propiedades.
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMoneyBillAlt, faHeart, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -37,23 +39,23 @@ const Itinerary = ({itinerary}) => {
     </div>
     {hashtag.map(hasthag => { return <p key={hasthag}>{hasthag}</p>})}
     {visible && (
-      <>
+      <div className="btnContent">
       <h4>Activities!</h4> 
       <div className="activities">
         {activities.map(activity => {
           return <Activity key={activity.title} activity={activity}/>
         })}
-    </div>
-    <h4>Leave a comment!</h4>
-    <div className="comments">
+      </div>
+      <h4>Leave a comment!</h4>
+      <div className="comments">
       {comments.map(comments => {
         return <Comment key={comments.comment} comments={comments}/>})}
       <div className="inputDiv">
         <FontAwesomeIcon className="enter" icon={faPaperPlane}/>
         <input type="text" name="inputComment" id="inputComment" disabled placeholder="You need to be logged to comment!"/>
       </div>
+      </div>
     </div>
-    </>
     )}
     <button className="btnItinerary"onClick={()=> setVisible(!visible)} >{!visible ? 'View All' : 'View Less'}</button>
   </div>

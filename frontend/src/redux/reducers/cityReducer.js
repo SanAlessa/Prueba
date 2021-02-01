@@ -11,7 +11,11 @@ const cityReducer =(state = initialState, action)=> {
         cities: action.payload,
         searchCities: action.payload
       }
-
+    case 'GET_CITY':
+      return{
+        ...state,
+        cities: action.payload
+      }
     case 'SEARCH_CITIES':
       return {
         ...state,
