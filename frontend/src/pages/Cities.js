@@ -9,11 +9,13 @@ import cityActions from '../redux/actions/cityActions'
 
 // Componente correspondiente a la pagina Cities que va a llamar a los respectivos componentes.
 const Cities = (props) => {
-
+  
+  const {getCities} = props
+  
   useEffect(()=>{
-    props.getCities()
+    getCities()
     window.scrollTo(0,0)
-  },[])
+  },[getCities])
 
   // Funcion encargada de comparar si la data esta cargada o no y retorna el preloader. En caso de no haber ciudades devuelve un componente con una card especifica.
   const comparator = () => {
@@ -24,6 +26,7 @@ const Cities = (props) => {
       return <NoCity/>
     }
   }
+
   return(
     <>
     <SemiHero/>

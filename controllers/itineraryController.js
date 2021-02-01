@@ -14,7 +14,10 @@ const itineraryController = {
       cityId, title, userPic, userName, likes, hours, price, hashtag, activities, comments
     })
     saveItinerary.save()
-    .then(saveItinerary=> res.json({success:true, response: saveItinerary}))
+    .then( async saveItinerary => {
+      const itinerary = await saveItinerary.populate('cityId').execPopulate()
+      res.json({success:true, response: itinerary})
+    })
     .catch(error => res.json({success:false, error}))
   },
 
