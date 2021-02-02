@@ -9,6 +9,10 @@ const Home = ()  => {
   useEffect(()=>{
     window.scrollTo(0,0)
   })
+  function probando() {
+    document.querySelector('.prueba').style.backgroundColor= 'red'
+    document.querySelector('#probando').classList.toggle('show')
+  }
     return (
       <>
         <Hero/>

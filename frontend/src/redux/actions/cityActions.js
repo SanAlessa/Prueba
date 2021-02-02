@@ -8,18 +8,12 @@ const cityActions = {
       }catch(error) {
         console.log(error)
       }
-  }
-},
+    }
+  },
   getCity:(id) => {
     return async (dispatch, getState) => {
-      try {
-        const response = await fetch('http://localhost:4000/api/cities/'+id)
-        const data = await response.json()
-        dispatch({type: 'GET_CITY', payload: data.response})
-      }catch(error){
-        console.log(error)
+      dispatch({type: 'GET_CITY', payload: id})
       }
-    }
   },
 
   searchCities: (inputValue) => {

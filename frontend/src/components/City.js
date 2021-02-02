@@ -35,10 +35,10 @@ const City =(props)=> {
       return <NoItineraries/>
     }
   }
-
+  console.log(cities[0])
   return (
     <>
-    <CityHeader city={cities}/>
+    <CityHeader city={cities[0]}/>
     <h3 style={{textAlign: "center"}}>Available Itineraries for {cities.cityName}</h3>
     <div style={{display: 'flex', justifyContent: 'center'}}>{comparator()}</div>
     {props.allItineraries.map(itinerary => {

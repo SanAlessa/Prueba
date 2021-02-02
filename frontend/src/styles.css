@@ -84,7 +84,6 @@ div#root {
   margin-right: 0.5vw;
 }
 
-
 .navbar-toggler {
   border-radius: 50px !important;
   outline: none !important;
@@ -94,25 +93,13 @@ div#root {
   margin-left: 2vw;
 }
 
-/* Estilos del logo y su contenido */
+/* Estilos del logo */
 .logo {
   margin: 1vh auto;
   width: 50vw;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.divIconos {
-  display: flex;
-  justify-content: center;
-  justify-content: space-evenly;
-  margin: 2vh 0vw;
-}
-
-i {
-  color: #82b1ff;
-  font-size: 50px;
 }
 
 /* Estilos del CTA */
@@ -277,7 +264,6 @@ div.active{
   box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.623);
 }
 
-
 .nameDescription h5 {
   display: inline;
   background-color: rgba(0, 0, 0, 0.4);
@@ -306,7 +292,6 @@ div.active{
 .city:hover .nameDescription h5 {
   background-color: rgba(0, 0, 0, 0);
 }
-
 
 .divTitleImg {
   display: flex;
@@ -511,6 +496,7 @@ a.toItinerary {
   margin: 0;
   font-weight: bold;
 }
+
 .comment p {
   padding: 0vh 1vw;
   margin: 0;
@@ -563,9 +549,11 @@ a.toItinerary {
   position: relative;
   align-self: center;
 }
+
 .imgGoBack {
   margin: 1vh auto 0vh auto;
 }
+
 .goBackCities a {
   color: black;
 }
@@ -608,6 +596,39 @@ a.toItinerary {
   border-bottom-left-radius: 50px;
 }
 
+/* User styles */
+
+.dropDown {
+  cursor: pointer;
+  /* position: relative; */
+  height: 7vh;
+  overflow: hidden;
+  transition: 1s;
+  width: 10vw;
+  text-align: center;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+  overflow: hidden;
+}
+.prueba {
+  height: 14vh;
+}
+
+
+/* SignUp Styles */
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  margin: auto auto;
+  width: 30vw;
+}
+
+
 /* PRELOADER */
 @keyframes ldio-mkynfyfi3c {
   0% { transform: translate(-50%,-50%) rotate(0deg); }
@@ -642,6 +663,8 @@ a.toItinerary {
   transform-origin: 0 0; 
 }
 .ldio-mkynfyfi3c div { box-sizing: content-box; }
+
+
 
 
 /* Estilos del FOOTER */
