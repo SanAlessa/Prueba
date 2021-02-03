@@ -10,12 +10,6 @@ const cityActions = {
       }
     }
   },
-  getCity:(id) => {
-    return async (dispatch, getState) => {
-      dispatch({type: 'GET_CITY', payload: id})
-      }
-  },
-
   searchCities: (inputValue) => {
     return async (dispatch, getState) => {
       dispatch({type: 'SEARCH_CITIES', payload: inputValue })

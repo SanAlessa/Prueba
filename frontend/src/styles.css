@@ -618,14 +618,63 @@ a.toItinerary {
   height: 14vh;
 }
 
-
 /* SignUp Styles */
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30vw;
+  margin: auto auto;
+  height: 45vh;
+  border-radius: 30px;
+  background-color: #2f7dd1;
+  box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.562);
+}
 
 .signUpForm {
   display: flex;
   flex-direction: column;
   margin: auto auto;
-  width: 30vw;
+}
+
+.inputIcon {
+  position: relative;
+}
+
+.inputForm {
+  font-size: 1.2rem;
+  margin: 1vh;
+  border-radius: 20px;
+  border: none;
+  border-bottom: 1px solid black;
+  border-bottom-left-radius: 0%;
+  border-bottom-right-radius: 0%;
+  text-align: center;
+  outline: none;
+  background-color: #2f7dd1;
+  color: rgba(0, 0, 0, 0.651);
+  width: 20vw; 
+}
+
+.inputForm::placeholder { 
+  color: rgba(0, 0, 0, 0.651); 
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+}
+
+
+.createAcc {
+  align-self: center;
+  width: 10vw;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  padding: 0.5vh;
+  margin-bottom: 2vh;
 }
 
 

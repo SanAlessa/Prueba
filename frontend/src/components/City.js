@@ -8,25 +8,27 @@ import itinerariesActions from "../redux/actions/itinerariesActions"
 import NoItineraries from '../components/NoItineraries'
 import Itinerary from '../components/Itinerary'
 import Preloader from "./Preloader";
-import cityActions from "../redux/actions/cityActions";
 
 const City =(props)=> {
   const [loading, setLoading] = useState(true)
+  const [city, setCity] = useState({})
   const id = props.match.params.id
-  const {getItineraries, getCity, cities} = props
+  const {getItineraries, cities} = props
 
   useEffect(()=> {
+    var ciudad = cities.filter(city => city._id === id)
+    setCity(ciudad[0])
     fetchData()
     window.scrollTo(0, 0)
+    cities.length=== 0 && props.history.push('/cities')
   }, [])
 
-  // Funcion async donde incluyo las funciones de cada funcion que realizan el pedido a la api y esta es quien va a ser llamada en al montarse.
-  // Con esto el estado al recargar la pagina se vuelve a llenar y no queda vacio y puedo manipular un estado propio (loading) y puedo trabajar con el preloader.
-  const fetchData = async() => {
-    await getCity(id)
+  // Funcion async donde incluyo la funcion que en su action tiene un pedido ajax, por ende tiene una promesa y esto me permite utilizar el estado de loadgin.
+
+  const fetchData =async () => {
     await getItineraries(id)
     setLoading(false)
-  }
+    }
 
   const comparator=()=>{
     if(loading) {
@@ -35,10 +37,9 @@ const City =(props)=> {
       return <NoItineraries/>
     }
   }
-  console.log(cities[0])
-  return (
+    return (
     <>
-    <CityHeader city={cities[0]}/>
+    <CityHeader city={city}/>
     <h3 style={{textAlign: "center"}}>Available Itineraries for {cities.cityName}</h3>
     <div style={{display: 'flex', justifyContent: 'center'}}>{comparator()}</div>
     {props.allItineraries.map(itinerary => {
@@ -57,7 +58,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = {
   getItineraries: itinerariesActions.getItineraries,
-  getCity: cityActions.getCity
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(City)
