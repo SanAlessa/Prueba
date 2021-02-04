@@ -1,19 +1,11 @@
 const User = require('../models/User')
 const bcryptjs = require ('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const userController = {
   signUp: async (req, res) => {
     var errors = []
     const {firstname, lastname, username, country, email, image, password, rol} = req.body
-    if(firstname === '' || lastname === '' || username === '' || email === '' || image === '' || password === ''){
-      errors.push('Cannot be empty')
-    }
-    if(email.split('@').length !== 2 || email.split('@')[1].split('.').length <2 || email.split('@')[1].split('.').length > 3){
-      errors.push('Please enter a valid email address')
-    }
-    if(password.length < 6){
-      errors.push('Must contain 6 characters at least')
-    }
     const userExists = await User.findOne({username: username})
     if(userExists){
       errors.push("This user it's already been taken")
@@ -25,15 +17,16 @@ const userController = {
         firstname, lastname, username, email, image, password: passwordHashed, rol, country
       })
       var newUserSaved = await newUser.save()
+      var token = jwt.sign({...newUserSaved}, process.env.SECRET_KEY,{})
     }
     return res.json({success: errors.length === 0 ? true : false,
                     errors: errors,
-                    response: newUserSaved})
+                    response: errors.length === 0 && {token, name: newUserSaved.firstname, pic: newUserSaved.image}})
   },
   
   logIn: async (req, res) => {
-    const {username, email, password} = req.body
-    const userExists = await User.findOne({username:username})
+    const {username, password} = req.body
+    const userExists = await User.findOne({username: username})
     if(!userExists){
       return res.json({success:false, response: 'Username or password are not correct'})
     }
@@ -41,7 +34,8 @@ const userController = {
     if(!passwordMatches){
       return res.json({success: false, response: 'Username or password are not correct'})
     }
-    return res.json({success:true})
+    var token = jwt.sign({...userExists}, process.env.SECRET_KEY, {})
+    return res.json({success:true, response: {token, name: userExists.firstname, pic: userExists.image}})
   }
 } 
 

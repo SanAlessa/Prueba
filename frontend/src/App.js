@@ -7,8 +7,11 @@ import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Cities from './pages/Cities'
 import City from './components/City'
 import SignUp from './components/SignUp'
+import LogIn from './components/LogIn'
+import {connect} from 'react-redux'
 
-function App() {
+function App(props) {
+
 return (
   <>
     <BrowserRouter>
@@ -17,6 +20,7 @@ return (
         <Route exact path="/cities" component={Cities}/>
         <Route path="/cities/:id" component={City}/>
         <Route path="/signup" component={SignUp}/>
+        <Route path="/login" component={LogIn}/>
         <Redirect to="/"/>
       </Switch>
       <Footer/>
@@ -25,4 +29,10 @@ return (
 )
 }
 
-export default App;
+const mapStateToProps = state =>{
+  return {
+    userLogged: state.userR.userLogged
+  }
+}
+
+export default connect(mapStateToProps)(App);

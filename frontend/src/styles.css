@@ -20,17 +20,26 @@ div#root {
 }
 
 /* Estilos del HERO */
-.hero-image, .hero-image-city {
+.hero-image, .hero-image-city{
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 2vh;
 }
-.hero-image-city {
+.hero-image-city{
   height: 50vh;
   background-color: rgba(0, 0, 0, 0.2);
   background-blend-mode:soft-light;
+}
+.hero-image-signup{
+  height: 35vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode:soft-light;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 2vh;
 }
 
 .imgLogo {
@@ -77,11 +86,20 @@ div#root {
   color: white;
 }
 
+
+
 .imgLogIn{
-  align-self: center;
+  width: 8vw;
+  height: 8vw;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  margin-left: 2vw;
+  /* align-self: center;
   padding-top: 0.5vh;
   padding-bottom: 1vh;
-  margin-right: 0.5vw;
+  margin-right: 0.5vw; */
 }
 
 .navbar-toggler {
@@ -89,9 +107,10 @@ div#root {
   outline: none !important;
 }
 
-.active {
+a{ 
   margin-left: 2vw;
 }
+
 
 /* Estilos del logo */
 .logo {
@@ -599,6 +618,7 @@ a.toItinerary {
 /* User styles */
 
 .dropDown {
+  align-self: center;
   cursor: pointer;
   /* position: relative; */
   height: 7vh;
@@ -606,6 +626,7 @@ a.toItinerary {
   transition: 1s;
   width: 10vw;
   text-align: center;
+  position: relative;
 }
 
 .dropdown {
@@ -613,6 +634,11 @@ a.toItinerary {
   flex-direction: column;
   /* background-color: red; */
   overflow: hidden;
+  /* position: absolute; */
+}
+
+.dropdown a {
+  margin-left: 0vw;
 }
 .prueba {
   height: 14vh;
@@ -626,9 +652,9 @@ a.toItinerary {
   justify-content: center;
   width: 30vw;
   margin: auto auto;
-  height: 45vh;
+  height: 50vh;
   border-radius: 30px;
-  background-color: #2f7dd1;
+  background-color: #449dfd;
   box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.562);
 }
 
@@ -652,13 +678,13 @@ a.toItinerary {
   border-bottom-right-radius: 0%;
   text-align: center;
   outline: none;
-  background-color: #2f7dd1;
+  background-color: #449dfd;
   color: rgba(0, 0, 0, 0.651);
   width: 20vw; 
 }
 
 .inputForm::placeholder { 
-  color: rgba(0, 0, 0, 0.651); 
+  color: white; 
 }
 
 select {
@@ -666,15 +692,23 @@ select {
   cursor: pointer;
 }
 
-
 .createAcc {
   align-self: center;
   width: 10vw;
   border-radius: 30px;
   border: none;
-  outline: none;
+  outline: none !important;
   padding: 0.5vh;
-  margin-bottom: 2vh;
+  transition: 0.5s;
+}
+
+.googleBtn {
+  margin: auto;
+  width: 20vw;
+  color: black;
+}
+.createAcc:hover {
+  transform: scale(0.9);
 }
 
 

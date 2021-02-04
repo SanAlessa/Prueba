@@ -3,6 +3,7 @@
 import Header from "./Header";
 
 const SemiHero =()=>{
+
   return(
     <>
       <div className="hero-image-city" style={{backgroundImage: "url('./assets/plane.jpg')"}}>

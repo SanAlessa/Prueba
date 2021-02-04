@@ -12,19 +12,32 @@ import {
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux';
+import userActions from '../redux/actions/userActions';
 
 const Header = (props)=>{
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   
-  const dropdown =()=> {
-    /*Cuando se hace click en el botón, muestra el submenu*/
-    //Añade una clase al elemento que tenga el id myDropdown
-    document.getElementById("dropdown").classList.toggle('show');
-    document.getElementById("dropp").classList.toggle('prueba')
+  console.log(props.userLogged)
+  if(props.userLogged){
+    var links = 
+    <>
+      <NavItem>
+        <NavLink to="/signUp" className="signupBtn" onClick={()=> props.logOut()}>Log Out</NavLink>
+      </NavItem>
+    </>
+  }else {
+    var links = 
+    <>
+      <NavItem>
+        <NavLink to="/signUp" className="signupBtn">Sign Up</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink to="/logIn" className="loginBtn">Log In</NavLink>
+      </NavItem>
+    </>
   }
-
-  
   return (
     <>
     {/* LLAMA AL COMPARADOR DE RUTA */}
@@ -40,22 +53,30 @@ const Header = (props)=>{
               <NavItem>
                 <NavLink className="active" to="/cities">Cities</NavLink>
               </NavItem>
+              {links}
             </Nav>
             </Collapse>
         </Navbar>
         <div>
           <img id="logo" src="../assets/logo.png" alt="logo" style={{visibility: 'hidden', width: '4vw', marginLeft: '-5vw', minWidth: '50px'}}/>
         </div>
-        <div className="dropDown" id="dropp" onClick={()=> dropdown()}>
-          <FontAwesomeIcon className="chevronDown" style={{color: 'white'}} icon={faChevronDown}/>
-          <img className="imgLogIn" id="imgLogin" style={{width: '5vw', minWidth: '60px'}} src="../assets/login1.png" alt="Login img" />
-          <div id="dropdown" className="dropdown">
-            <NavLink to="/signUp" className="signupBtn">Sign Up</NavLink>
-            <NavLink to="/logIn" className="loginBtn">Log In</NavLink>
-          </div>
-        </div>
+        <div style={{display: 'flex', alignItems: 'center'}}>
+        {props.userLogged && <h2 style={{color: 'white'}}>Hi! Welcome, {props.userLogged.response.name}</h2>}
+        <div className="imgLogIn" id="imgLogin" style={{backgroundImage: `url(${props.userLogged ? props.userLogged.response.pic : '../assets/login1.png'})`}} alt="Login img" /></div>
     </div>
     </>
   )
 }
-export default Header
+
+const mapStateToProps = state => {
+  return {
+    userLogged: state.userR.userLogged
+  }
+}
+
+const mapDispatchToProps = {
+  logOut: userActions.logOut
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
