@@ -11,8 +11,10 @@ import GoogleLogin from 'react-google-login';
 const SignUp = (props) => {
   const [countries, setCountries] = useState([])
   const [newUser, setNewUser] = useState({})
-  const [errors, setErrors] = useState([])
-  
+  const [errors, setErrors] = useState({})
+  const errorsInput = {
+    firstname: null, lastname: null, email: null, username: null, password: null, image: null, country: null
+  }
 
   const readInput =(e)=> {
     const value = e.target.value
@@ -27,22 +29,24 @@ const SignUp = (props) => {
     axios.get('https://restcountries.eu/rest/v2/all/')
     .then(response => setCountries(response.data))
   },[])
-  console.log(props)
-
+  
   const validateInfo = async () => {
     const response = await props.createUser(newUser)
     if(response && !response.success){
-      setErrors(response.errors)
+      response.errors.map(error=> {
+        errorsInput[error.context.label]=error.message
+        return false
+      })
+      setErrors(errorsInput)
     }else {
       alert('Usuario Creado!')
-
     }
   }
-
+  console.log(errors)
   const responseGoogle =async (response)=> {
-    // if(response.error){
-    //   alert('Ups, something went wrong')
-    // }
+    if(response.error){
+      alert('Ups, something went wrong')
+    }
     const res = await props.createUser({
       username: response.profileObj.givenName,
       email: response.profileObj.email,
@@ -52,13 +56,12 @@ const SignUp = (props) => {
       password: 'As12',
       country: 'Argentina'
     })
-    // if(response && !response.success){
-    //   setErrors(response.errors)
-    // }
+    if(response && !response.success){
+      setErrors(response.errors)
+    }
     alert('Usuario Creado!')
   }
 
-  console.log(props.userLogged)
   return(
     <>
     <div className="hero-image-signup" style={{backgroundImage: "url('https://blacklinesandbillables.com/wp-content/uploads/2016/09/notepad-1280x640.jpeg')"}}>
@@ -70,22 +73,27 @@ const SignUp = (props) => {
         <div className="inputIcon">
           <FontAwesomeIcon icon={faUser}/>
           <input className="inputForm" type="text" name="firstname" id="fn" placeholder="Enter your first name" onChange={readInput}/>
+          {errors.firstname && <p>{errors.firstname}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faUser}/>
           <input className="inputForm" type="text" name="lastname" id="ln" placeholder="Enter your last name" onChange={readInput}/>
+          {errors.firstname && <p>{errors.firstname}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faEnvelope}/>
           <input className="inputForm" type="text" name="email" id="em" placeholder="Enter your email" onChange={readInput}/>
+          {errors.firstname && <p>{errors.firstname}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faUserTie}/>
           <input className="inputForm" type="text" name="username" id="un" placeholder="Enter your Username" onChange={readInput}/>
+          {errors.firstname && <p>{errors.firstname}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faKey}/>
           <input className="inputForm" type="password" name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
+          {errors.firstname && <p>{errors.firstname}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faImage}/>
@@ -94,7 +102,7 @@ const SignUp = (props) => {
         <div className="inputIcon">
         <FontAwesomeIcon icon={faGlobeAmericas}/>
           <select style={{textAlignLast: 'center'}} className="inputForm" name="country" id="country" onChange={readInput}>
-            <option value="choose" disabled selected>Choose your country</option>
+            <option value="choose" disabled selected >Choose your country</option>
             {countries.map(country => <option value={country.name}>{country.name}</option>)}
           </select>
           <FontAwesomeIcon style={{position: 'absolute', right: '1rem', top: '0.9rem', cursor: 'pointer', zIndex: '1'}} icon={faAngleDown}/>
@@ -109,7 +117,6 @@ const SignUp = (props) => {
         cookiePolicy={'single_host_origin'}
       />
     </div>
-    {errors.map(error => <h2>{error}</h2>)}
     <Link to="/login"><h5>You already have an account? Log In!</h5></Link>
     </>
   )

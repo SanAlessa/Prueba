@@ -3,21 +3,53 @@ const Joi = require('joi')
 const validator = {
     validateNewAccount: (req, res, next) => {
       const schema = Joi.object({
-        firstname: Joi.string().trim().required().min(2).max(15),
-        lastname: Joi.string().trim().required().min(2).max(15),
-        username: Joi.string().trim().required().min(4).max(10),
-        country: Joi.string().trim().required(),
-        email: Joi.string().trim().required().email({tlds: {allow: false}}),
-        image: Joi.string().uri().required(),
-        password: Joi.string().trim().required().pattern(/(?=.*\d\d)(?=.*[A-Z])(?=.*[a-z])(?!.*[!"#$%&/()=?¡¨*^\][;:_])(?!.*\s).{4,}/),
+        firstname: Joi.string().trim().required().min(2).messages({
+          "string.base": "Should be a type of 'text'",
+          "string.empty": "This field can't be empty",
+          "any.required": "This field is required",
+          "string.min": "Must contain at least 2 letters",
+        }),
+        lastname: Joi.string().trim().min(2).required().messages({
+          "string.base": "Should be a type of 'text'",
+          "string.empty": "This field can't be empty",
+          "any.required": "This field is required",
+          "string.min": "Must contain at least 2 letters",
+        }),
+        username: Joi.string().trim().required().messages({
+          "string.base": "Should be a type of 'text'",
+          "string.empty": "This field can't be empty",
+          "any.required": "This field is required",
+          "string.min": "Must contain at least 4 characters",
+        }),
+        country: Joi.string().trim().required().messages({
+          "any.required": "This field is required"
+        }),
+        email: Joi.string().trim().required().email({tlds: {allow: false}}).messages({
+          "string.base": "Should be a type of 'text'",
+          "string.empty": "This field can't be empty",
+          "any.required": "This field is required",
+          "string.email": "Please write a valid email address"
+        }),
+        image: Joi.string().uri().required().messages({
+          "string.base": "Should be a type of 'text'",
+          "string.empty": "This field can't be empty",
+          "any.required": "This field is required",
+          "string.uri": "You shoul use a valid URL"
+        }),
+        password: Joi.string().trim().required().pattern(/(?=.*\d\d)(?=.*[A-Z])(?=.*[a-z])(?!.*[!"#$%&/()=?¡¨*^\][;:_])(?!.*\s).{4,}/).messages({
+          "string.base": "Should be a type of 'text'",
+          "string.empty": "This field can't be empty",
+          "any.required": "This field is required",
+          "string.pattern.base": "This must contain at least one capital letter, two numbers and four characters, it can't contain special characters"
+        }),
         rol: Joi.string().trim()
       })
       const validation = schema.validate(req.body, {abortEarly: false})
-      console.log(validation.error)
+      console.log(validation.error.details)
       if(!validation.error){
         next()
       }else{
-        res.json({success: false, errors: ["Hubo un error en los datos"]})
+        res.json({success: false, errors: validation.error.details})
       }
     }
 }

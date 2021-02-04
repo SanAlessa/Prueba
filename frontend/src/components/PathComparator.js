@@ -6,12 +6,10 @@ const PathComparator =()=>{
           document.querySelector('#header').setAttribute('class', 'header')
           document.querySelector('#imgLogin').setAttribute('src', "../assets/login.png")
           document.querySelector('#logo').style.visibility = "visible"
-          document.querySelector('.chevronDown').style.color = "#3BA9E8"
         }else{
           document.querySelector('#header').setAttribute('class', 'principalHeader')
           document.querySelector('#imgLogin').setAttribute('src', "../assets/login1.png")
           document.querySelector('#logo').style.visibility = "hidden"
-          document.querySelector('.chevronDown').style.color = "white"
         }
       }else if(e.path[0].URL === 'http://localhost:3000/cities'){
         if(window.scrollY > 350){
