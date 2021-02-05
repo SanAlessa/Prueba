@@ -10,10 +10,30 @@ import {
 } from 'reactstrap';
 import { NavLink } from "react-router-dom";
 
-const CityHeader = ({city}) => {
+const CityHeader = ({city, props}) => {
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const {cityPic, cityName} = city
+  const {logOut} = props
+
+  if(props.userLogged){
+    var links = 
+    <>
+      <NavItem>
+        <NavLink to="/login" className="signupBtn" onClick={()=> logOut()}>Log Out</NavLink>
+      </NavItem>
+    </>
+  }else {
+    links = 
+    <>
+      <NavItem>
+        <NavLink to="/signUp" className="signupBtn">Sign Up</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink to="/logIn" className="loginBtn">Log In</NavLink>
+      </NavItem>
+    </>
+  }
   
   return (
     <>
@@ -29,10 +49,14 @@ const CityHeader = ({city}) => {
                 <NavItem>
                   <NavLink className="active" to="/cities">Cities</NavLink>
                 </NavItem>
+                {links}
               </Nav>
             </Collapse>
         </Navbar>
-        <img className="imgLogIn" style={{width: '5vw', minWidth: '60px'}} src="../assets/login1.png" alt="Login img"></img>
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          {props.userLogged && <h2 style={{color: 'white'}}>Hi! Welcome, {props.userLogged.response.name}</h2>}
+          <div className="imgLogIn" id="imgLogin" style={{backgroundImage: `url(${props.userLogged ? props.userLogged.response.pic : '../assets/login1.png'})`}} alt="Login img" />
+        </div>
       </div>
       <div className="hero-text-city" style={{color: 'white'}}>
         <h1>{cityName}</h1>
@@ -42,4 +66,9 @@ const CityHeader = ({city}) => {
     </>
   )
 }
+
+
+
+
+
 export default CityHeader

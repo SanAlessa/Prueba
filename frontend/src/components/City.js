@@ -8,6 +8,7 @@ import itinerariesActions from "../redux/actions/itinerariesActions"
 import NoItineraries from '../components/NoItineraries'
 import Itinerary from '../components/Itinerary'
 import Preloader from "./Preloader";
+import userActions from '../redux/actions/userActions'
 
 const City =(props)=> {
   const [loading, setLoading] = useState(true)
@@ -25,7 +26,7 @@ const City =(props)=> {
 
   // Funcion async donde incluyo la funcion que en su action tiene un pedido ajax, por ende tiene una promesa y esto me permite utilizar el estado de loadgin.
 
-  const fetchData =async () => {
+  const fetchData = async () => {
     await getItineraries(id)
     setLoading(false)
     }
@@ -39,7 +40,7 @@ const City =(props)=> {
   }
     return (
     <>
-    <CityHeader city={city}/>
+    <CityHeader city={city} props={props}/>
     <h3 style={{textAlign: "center"}}>Available Itineraries for {cities.cityName}</h3>
     <div style={{display: 'flex', justifyContent: 'center'}}>{comparator()}</div>
     {props.allItineraries.map(itinerary => {
@@ -53,11 +54,13 @@ const City =(props)=> {
 const mapStateToProps = (state) => {
   return {
     cities: state.citiesR.cities,
-    allItineraries: state.itinerariesR.itineraries
+    allItineraries: state.itinerariesR.itineraries,
+    userLogged: state.userR.userLogged
   }
 }
 const mapDispatchToProps = {
   getItineraries: itinerariesActions.getItineraries,
+  logOut: userActions.logOut
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(City)

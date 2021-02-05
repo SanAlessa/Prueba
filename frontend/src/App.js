@@ -11,21 +11,39 @@ import LogIn from './components/LogIn'
 import {connect} from 'react-redux'
 
 function App(props) {
+  console.log(props)
+ if(props.userLogged){
+   var routes = 
+   <>
+    <Switch>
+      <Route exact path="/" component={Home}/>
+      <Route exact path="/cities" component={Cities}/>
+      <Route path="/cities/:id" component={City}/>
+      <Route path="/signup" component={SignUp}/>
+      <Route path="/login" component={LogIn}/>
+      <Redirect to="/"/>
+    </Switch>
+   </>
+ }else{
+   console.log('hola')
+   routes =
+   <>
+    <Switch>
+      <Route exact path="/cities" component={Cities}/>
+      {/* <Route path="/cities/:id" component={City}/> */}
+      <Route path="/signup" component={SignUp}/>
+      <Route path="/login" component={LogIn}/>
+      <Redirect to="/"/>
+    </Switch>
+   </>
+ }
 
 return (
-  <>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/cities" component={Cities}/>
-        <Route path="/cities/:id" component={City}/>
-        <Route path="/signup" component={SignUp}/>
-        <Route path="/login" component={LogIn}/>
-        <Redirect to="/"/>
-      </Switch>
-      <Footer/>
-    </BrowserRouter>
-  </>
+  <BrowserRouter>
+    <Route exact path="/" component={Home}/>
+    {routes}
+    <Footer/>
+  </BrowserRouter>
 )
 }
 

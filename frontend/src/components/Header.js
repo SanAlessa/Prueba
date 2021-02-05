@@ -19,7 +19,6 @@ const Header = (props)=>{
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   
-  console.log(props.userLogged)
   if(props.userLogged){
     var links = 
     <>
@@ -28,7 +27,7 @@ const Header = (props)=>{
       </NavItem>
     </>
   }else {
-    var links = 
+    links = 
     <>
       <NavItem>
         <NavLink to="/signUp" className="signupBtn">Sign Up</NavLink>
@@ -61,8 +60,9 @@ const Header = (props)=>{
           <img id="logo" src="../assets/logo.png" alt="logo" style={{visibility: 'hidden', width: '4vw', marginLeft: '-5vw', minWidth: '50px'}}/>
         </div>
         <div style={{display: 'flex', alignItems: 'center'}}>
-        {props.userLogged && <h2 style={{color: 'white'}}>Hi! Welcome, {props.userLogged.response.name}</h2>}
-        <div className="imgLogIn" id="imgLogin" style={{backgroundImage: `url(${props.userLogged ? props.userLogged.response.pic : '../assets/login1.png'})`}} alt="Login img" /></div>
+          {props.userLogged && <h2 style={{color: 'white'}}>Hi! Welcome, {props.userLogged.response.name}</h2>}
+          <div className="imgLogIn" id="imgLogin" style={{backgroundImage: `url(${props.userLogged ? props.userLogged.response.pic : '../assets/login1.png'})`}} alt="Login img" />
+        </div>
     </div>
     </>
   )

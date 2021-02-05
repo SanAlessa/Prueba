@@ -5,11 +5,12 @@ import { faUserTie, faKey} from '@fortawesome/free-solid-svg-icons'
 import Header from "./Header"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
+import GoogleLogin from 'react-google-login';
 
 
 const LogIn = (props) => {
   const [userLogged, setUserLogged] = useState({})
-  // const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState({})
   
   const readInput =(e)=> {
     const value = e.target.value
@@ -19,11 +20,26 @@ const LogIn = (props) => {
       [prop]: value
     })
   }
+
+  const responseGoogle =async (response)=> {
+    console.log(response)
+    if(response.error){
+      alert('Ups, something went wrong')
+    }
+    const res = await props.logUser({
+      username: response.profileObj.givenName,
+      password: 'Aa'+response.profileObj.googleId,
+    })
+    if(res && !response.success){
+      setErrors(response.errors)
+    }
+    alert('Usuario Creado!')
+  }
+
   const validateInfo = () => {
     props.logUser(userLogged)
     alert('Bienvenido')
   }
-  console.log(props.userLogged)
   return(
     <>
     <div className="hero-image-signup" style={{backgroundImage: "url('https://blacklinesandbillables.com/wp-content/uploads/2016/09/notepad-1280x640.jpeg')"}}>
@@ -42,6 +58,13 @@ const LogIn = (props) => {
           </div>
       </form>
       <button className="createAcc" onClick={()=>validateInfo()}>Sign In</button>
+      <GoogleLogin className="googleBtn"
+        clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
+        buttonText="Log In with Google"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={'single_host_origin'}
+      />
     </div>
     <Link to="/signup"><h5>You don't have an account? Sign Up!</h5></Link>
     </>

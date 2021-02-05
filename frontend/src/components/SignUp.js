@@ -42,7 +42,7 @@ const SignUp = (props) => {
       alert('Usuario Creado!')
     }
   }
-  console.log(errors)
+  
   const responseGoogle =async (response)=> {
     if(response.error){
       alert('Ups, something went wrong')
@@ -53,10 +53,10 @@ const SignUp = (props) => {
       firstname: response.profileObj.givenName,
       lastname: response.profileObj.familyName,
       image: response.profileObj.imageUrl,
-      password: 'As12',
+      password: 'Aa'+response.profileObj.googleId,
       country: 'Argentina'
     })
-    if(response && !response.success){
+    if(res && !response.success){
       setErrors(response.errors)
     }
     alert('Usuario Creado!')
@@ -78,30 +78,32 @@ const SignUp = (props) => {
         <div className="inputIcon">
           <FontAwesomeIcon icon={faUser}/>
           <input className="inputForm" type="text" name="lastname" id="ln" placeholder="Enter your last name" onChange={readInput}/>
-          {errors.firstname && <p>{errors.firstname}</p>}
+          {errors.lastname && <p>{errors.lastname}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faEnvelope}/>
           <input className="inputForm" type="text" name="email" id="em" placeholder="Enter your email" onChange={readInput}/>
-          {errors.firstname && <p>{errors.firstname}</p>}
+          {errors.email && <p>{errors.email}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faUserTie}/>
           <input className="inputForm" type="text" name="username" id="un" placeholder="Enter your Username" onChange={readInput}/>
-          {errors.firstname && <p>{errors.firstname}</p>}
+          {errors.username && <p>{errors.username}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faKey}/>
           <input className="inputForm" type="password" name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
-          {errors.firstname && <p>{errors.firstname}</p>}
+          {errors.password && <p>{errors.password}</p>}
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon icon={faImage}/>
           <input className="inputForm" type="text" name="image" id="img" placeholder="Enter an url img" onChange={readInput}/>
+          {errors.image && <p>{errors.image}</p>}
           </div>
         <div className="inputIcon">
         <FontAwesomeIcon icon={faGlobeAmericas}/>
           <select style={{textAlignLast: 'center'}} className="inputForm" name="country" id="country" onChange={readInput}>
+          {errors.country && <p>{errors.country}</p>}
             <option value="choose" disabled selected >Choose your country</option>
             {countries.map(country => <option value={country.name}>{country.name}</option>)}
           </select>
@@ -109,15 +111,15 @@ const SignUp = (props) => {
         </div>
       </form>
       <button className="createAcc" onClick={()=>validateInfo()}>Create Account</button>
-      <GoogleLogin className="googleBtn"
+    </div>
+    <Link to="/login"><h5>You already have an account? Log In!</h5></Link>
+    <GoogleLogin className="googleBtn"
         clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
         buttonText="Create Account with Google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
       />
-    </div>
-    <Link to="/login"><h5>You already have an account? Log In!</h5></Link>
     </>
   )
 }

@@ -36,16 +36,16 @@ const validator = {
           "any.required": "This field is required",
           "string.uri": "You shoul use a valid URL"
         }),
-        password: Joi.string().trim().required().pattern(/(?=.*\d\d)(?=.*[A-Z])(?=.*[a-z])(?!.*[!"#$%&/()=?¡¨*^\][;:_])(?!.*\s).{4,}/).messages({
-          "string.base": "Should be a type of 'text'",
+        password: Joi.string().trim().required().pattern(/(?=.*\d\d)(?=.*[A-Z])(?=.*[a-z])(?!.*[!"#$%&/()=?¡¨*^\][;:_])(?!.*\s).{4,}/).min(4).messages({
           "string.empty": "This field can't be empty",
           "any.required": "This field is required",
-          "string.pattern.base": "This must contain at least one capital letter, two numbers and four characters, it can't contain special characters"
+          "string.pattern.base": "This must contain an uppercase letter, a lowercase and two numbers.",
+          "string.min": "Must contain at least four characters",
         }),
         rol: Joi.string().trim()
       })
       const validation = schema.validate(req.body, {abortEarly: false})
-      console.log(validation.error.details)
+
       if(!validation.error){
         next()
       }else{

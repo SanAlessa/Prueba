@@ -5,7 +5,7 @@ const userActions = {
   createUser: (newUser)=> {
     return async (dispatch, getState) => {
       const response = await axios.post('http://localhost:4000/api/signup', newUser)
-      console.log(response)
+
       if(!response.data.success){
         return response.data
       }
@@ -28,6 +28,11 @@ const userActions = {
   logOut: () => {
     return (dispatch, getState) => {
       dispatch({type: 'LOG_OUT'}) 
+    }
+  },
+  logByStorage: () => {
+    return (dispatch, getState) => {
+      dispatch({type: 'LOG_USER'})
     }
   }
 

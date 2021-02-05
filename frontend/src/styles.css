@@ -649,10 +649,9 @@ a.toItinerary {
 .formContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 30vw;
+  width: 40vw;
   margin: auto auto;
-  height: 50vh;
+  /* height: 50vh; */
   border-radius: 30px;
   background-color: #449dfd;
   box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.562);
@@ -661,7 +660,7 @@ a.toItinerary {
 .signUpForm {
   display: flex;
   flex-direction: column;
-  margin: auto auto;
+  margin: 2vh auto;
 }
 
 .inputIcon {
@@ -670,7 +669,7 @@ a.toItinerary {
 
 .inputForm {
   font-size: 1.2rem;
-  margin: 1vh;
+  margin-top: 2vh;
   border-radius: 20px;
   border: none;
   border-bottom: 1px solid black;
@@ -700,6 +699,11 @@ select {
   outline: none !important;
   padding: 0.5vh;
   transition: 0.5s;
+  margin-top: 1vh;
+}
+
+.createAcc:hover {
+  transform: scale(0.9);
 }
 
 .googleBtn {
@@ -707,9 +711,7 @@ select {
   width: 20vw;
   color: black;
 }
-.createAcc:hover {
-  transform: scale(0.9);
-}
+
 
 
 /* PRELOADER */
