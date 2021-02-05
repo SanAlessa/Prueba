@@ -4,6 +4,7 @@ const cityController = require('../controllers/cityController')
 const itineraryController = require('../controllers/itineraryController')
 const userController = require ('../controllers/userController')
 const validator = require('../controllers/validator')
+const commentController = require('../controllers/commentController')
 const passport = require('passport')
 require('../config/passport')
 
@@ -33,7 +34,8 @@ router.route('/login')
 router.route('/login/ls')
 .post(passport.authenticate('jwt', {session: false}), userController.logFromLStorage)
 
-router.route('/comment')
-.post(passport.authenticate('jwt', {session: false}))
+router.route('/comments')
+.put(passport.authenticate('jwt', {session: false}),commentController.addComment)
+
 
 module.exports = router

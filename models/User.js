@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
   image: String,
   password: String,
   rol: {type: String, default: 'nonadmin'},
-  likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'itinerary'}]
 })
 
 const User = mongoose.model('user', userSchema)

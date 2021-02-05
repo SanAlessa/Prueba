@@ -11,6 +11,8 @@ import LogIn from './components/LogIn'
 import {connect} from 'react-redux'
 import userActions from './redux/actions/userActions'
 import { useState } from 'react'
+import commentActions from './redux/actions/commentActions'
+
 
 function App(props) {
   const [reload, setReload] = useState(false)
@@ -37,7 +39,7 @@ function App(props) {
    <>
     <Switch>
       <Route exact path="/cities" component={Cities}/>
-      {/* <Route path="/cities/:id" component={City}/> */}
+      <Route path="/cities/:id" component={City}/>
       <Route path="/signup" component={SignUp}/>
       <Route path="/login" component={LogIn}/>
       <Redirect to="/"/>
@@ -61,7 +63,8 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = {
-  logInFromLS: userActions.logInFromLS
+  logInFromLS: userActions.logInFromLS,
+  addComment: commentActions.addComment
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

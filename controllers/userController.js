@@ -39,7 +39,6 @@ const userController = {
   },
 
   logFromLStorage: async (req, res) => {
-    console.log(req.user)
     res.json({succes: true, response: {token: req.body.token, name: req.user.firstname, pic: req.user.image}})
   }
 } 

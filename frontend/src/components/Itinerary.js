@@ -8,18 +8,27 @@ import {
   findIconDefinition
 } from '@fortawesome/fontawesome-svg-core'
 import './FonAwesomIcons'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Activity from './Activity'
 import Comment from './Comment'
+import { connect } from "react-redux"
+import commentActions from "../redux/actions/commentActions"
+
 
 const heartLookup: IconLookup = { prefix: 'far', iconName: 'heart' }
 const heartIconDefinition: IconDefinition = findIconDefinition(heartLookup)
 
-
-const Itinerary = ({itinerary}) => {
-  
+const Itinerary = (props) => {
   const [visible, setVisible] = useState(false)
-  const { title, userPic, userName, hours, likes, price, hashtag, activities, comments } = itinerary
+  const { title, userPic, userName, hours, likes, price, hashtag, activities, comments, _id } = props.itinerary
+  const [comment, setComment] = useState('')
+
+
+  const sendComment =()=> {
+    props.addComment(comment, localStorage.getItem('token'), _id)
+    document.getElementById('inputComment').value=''
+  }
+
 
   return (
   <div className="itinerary" style={{backgroundImage: 'url("../assets/simpleshiny.svg")'}}>
@@ -51,8 +60,8 @@ const Itinerary = ({itinerary}) => {
       {comments.map(comments => {
         return <Comment key={comments.comment} comments={comments}/>})}
       <div className="inputDiv">
-        <FontAwesomeIcon className="enter" icon={faPaperPlane}/>
-        <input type="text" name="inputComment" id="inputComment" disabled placeholder="You need to be logged to comment!"/>
+        <FontAwesomeIcon className="enter" icon={faPaperPlane} id={_id} onClick={sendComment}/>
+        <input type="text" name="inputComment" id="inputComment" placeholder="You need to be logged to comment!" onChange={(e)=>setComment(e.target.value)}/>
       </div>
       </div>
     </div>
@@ -62,4 +71,15 @@ const Itinerary = ({itinerary}) => {
   )
 }
 
-export default Itinerary
+const mapStateToProps = state => {
+  return {
+    commentAdded: state.commentR.comment
+  }
+}
+
+
+const mapDispatchToProps = {
+  addComment: commentActions.addComment
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)
