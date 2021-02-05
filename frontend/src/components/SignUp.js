@@ -10,7 +10,9 @@ import GoogleLogin from 'react-google-login';
 
 const SignUp = (props) => {
   const [countries, setCountries] = useState([])
-  const [newUser, setNewUser] = useState({})
+  const [newUser, setNewUser] = useState({
+    firstname: '', lastname: '', email: '', username: '', password: '', image: '', country: ''
+  })
   const [errors, setErrors] = useState({})
   const errorsInput = {
     firstname: null, lastname: null, email: null, username: null, password: null, image: null, country: null
@@ -29,8 +31,13 @@ const SignUp = (props) => {
     axios.get('https://restcountries.eu/rest/v2/all/')
     .then(response => setCountries(response.data))
   },[])
-  
+
   const validateInfo = async () => {
+    if(newUser.firstname === '' || newUser.lastname === '' || newUser.email === '' 
+    || newUser.username === '' || newUser.password === '' 
+    || newUser.image === '' || newUser.country === ''){
+      alert("All the fields can't be empty")
+    }
     const response = await props.createUser(newUser)
     if(response && !response.success){
       response.errors.map(error=> {

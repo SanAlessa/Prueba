@@ -1,5 +1,4 @@
 const passport = require('passport')
-require('../config/passport')
 const jwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const User = require('../models/User')
@@ -29,5 +28,4 @@ module.exports = passport.use(new jwtStrategy({
   // Error en la promesa => Tengo error y no tengo usuario
     return done(error, false)
   })
-  }
-))
+}))

@@ -9,9 +9,12 @@ import City from './components/City'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
 import {connect} from 'react-redux'
+import userActions from './redux/actions/userActions'
+import { useState } from 'react'
 
 function App(props) {
-  console.log(props)
+  const [reload, setReload] = useState(false)
+  
  if(props.userLogged){
    var routes = 
    <>
@@ -24,8 +27,12 @@ function App(props) {
       <Redirect to="/"/>
     </Switch>
    </>
- }else{
-   console.log('hola')
+ }else if(localStorage.getItem('token')){
+   props.logInFromLS(localStorage.getItem('token'))
+   .then(response=> {
+    response && setReload(!reload)
+   })
+  }else{
    routes =
    <>
     <Switch>
@@ -53,4 +60,8 @@ const mapStateToProps = state =>{
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  logInFromLS: userActions.logInFromLS
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

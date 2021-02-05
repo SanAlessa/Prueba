@@ -30,6 +30,9 @@ router.route('/signup')
 router.route('/login')
 .post(userController.logIn)
 
+router.route('/login/ls')
+.post(passport.authenticate('jwt', {session: false}), userController.logFromLStorage)
+
 router.route('/comment')
 .post(passport.authenticate('jwt', {session: false}))
 

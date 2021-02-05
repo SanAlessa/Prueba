@@ -36,6 +36,11 @@ const userController = {
     }
     var token = jwt.sign({...userExists}, process.env.SECRET_KEY, {})
     return res.json({success:true, response: {token, name: userExists.firstname, pic: userExists.image}})
+  },
+
+  logFromLStorage: async (req, res) => {
+    console.log(req.user)
+    res.json({succes: true, response: {token: req.body.token, name: req.user.firstname, pic: req.user.image}})
   }
 } 
 

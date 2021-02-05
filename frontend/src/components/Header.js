@@ -23,7 +23,7 @@ const Header = (props)=>{
     var links = 
     <>
       <NavItem>
-        <NavLink to="/signUp" className="signupBtn" onClick={()=> props.logOut()}>Log Out</NavLink>
+        <NavLink to="/logIn" className="signupBtn" onClick={()=> props.logOut()}>Log Out</NavLink>
       </NavItem>
     </>
   }else {

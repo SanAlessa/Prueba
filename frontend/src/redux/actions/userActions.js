@@ -25,16 +25,32 @@ const userActions = {
       
     }
   },
+
+  logInFromLS: (token) => {
+    return async (dispatch, getState) => {
+      try{
+        const response = await axios.post('http://localhost:4000/api/login/ls', {token}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        dispatch({type: 'LOG_USER', payload: {response: {...response.data.response}}})
+        console.log(response)
+      }catch(err){
+        // Evalua el estado del error 401 (unauthorized)
+        if(err.response.status === 401) {
+          alert('Me estas cachando...')
+          localStorage.clear()
+          return true
+        }
+      }
+    }
+  },
+
   logOut: () => {
     return (dispatch, getState) => {
       dispatch({type: 'LOG_OUT'}) 
     }
   },
-  logByStorage: () => {
-    return (dispatch, getState) => {
-      dispatch({type: 'LOG_USER'})
-    }
-  }
-
 }
 export default userActions

@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   email: String,
   image: String,
   password: String,
-  rol: {type: String, default: 'nonadmin'}
+  rol: {type: String, default: 'nonadmin'},
+  likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'itinerary'}]
 })
 
 const User = mongoose.model('user', userSchema)
