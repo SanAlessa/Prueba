@@ -35,7 +35,11 @@ router.route('/login/ls')
 .post(passport.authenticate('jwt', {session: false}), userController.logFromLStorage)
 
 router.route('/comments')
-.put(passport.authenticate('jwt', {session: false}),commentController.addComment)
+.post(passport.authenticate('jwt', {session: false}),commentController.addComment)
+.put(passport.authenticate('jwt', {session: false}),commentController.deleteComment)
+
+router.route('/comments/update')
+.put(passport.authenticate('jwt', {session: false}), commentController.updateComment)
 
 
 module.exports = router

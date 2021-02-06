@@ -13,6 +13,7 @@ import Activity from './Activity'
 import Comment from './Comment'
 import { connect } from "react-redux"
 import commentActions from "../redux/actions/commentActions"
+import itinerariesActions from "../redux/actions/itinerariesActions"
 
 
 const heartLookup: IconLookup = { prefix: 'far', iconName: 'heart' }
@@ -23,9 +24,11 @@ const Itinerary = (props) => {
   const { title, userPic, userName, hours, likes, price, hashtag, activities, comments, _id } = props.itinerary
   const [comment, setComment] = useState('')
 
+  console.log(_id)
 
-  const sendComment =()=> {
-    props.addComment(comment, localStorage.getItem('token'), _id)
+  const sendComment = async (e) => {
+    await props.addComment(comment, localStorage.getItem('token'), _id)
+    props.getItineraries(props.id)
     document.getElementById('inputComment').value=''
   }
 
@@ -58,10 +61,10 @@ const Itinerary = (props) => {
       <h4>Leave a comment!</h4>
       <div className="comments">
       {comments.map(comments => {
-        return <Comment key={comments.comment} comments={comments}/>})}
+        return <Comment key={comments.comment} comments={comments} id={_id} cityId={props.id}/>})}
       <div className="inputDiv">
         <FontAwesomeIcon className="enter" icon={faPaperPlane} id={_id} onClick={sendComment}/>
-        <input type="text" name="inputComment" id="inputComment" placeholder="You need to be logged to comment!" onChange={(e)=>setComment(e.target.value)}/>
+        <input type="text" id="inputComment" placeholder="You need to be logged to comment!" onChange={(e)=>setComment(e.target.value)}/>
       </div>
       </div>
     </div>
@@ -79,7 +82,8 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = {
-  addComment: commentActions.addComment
+  addComment: commentActions.addComment,
+  getItineraries: itinerariesActions.getItineraries,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

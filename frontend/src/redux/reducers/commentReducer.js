@@ -9,10 +9,14 @@ const commentReducer = (state = initialState, action) => {
         ...state,
         comment: action.payload
       }
-    case 'RENDER':
+    case 'UPDATE_COMMENT':
       return{
         ...state,
-        comment: null
+        comment: action.payload
+      }
+    case 'DELETE_COMMENT':
+      return{
+        ...state
       }
     default:
     return state

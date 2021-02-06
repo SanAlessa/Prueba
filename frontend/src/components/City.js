@@ -44,7 +44,7 @@ const City =(props)=> {
     <h3 style={{textAlign: "center"}}>Available Itineraries for {cities.cityName}</h3>
     <div style={{display: 'flex', justifyContent: 'center'}}>{comparator()}</div>
     {props.allItineraries.map(itinerary => {
-      return <Itinerary key={itinerary._id} itinerary={itinerary}/>
+      return <Itinerary key={itinerary._id} itinerary={itinerary} id={id}/>
     })}
     <GoBack/>
     </>
