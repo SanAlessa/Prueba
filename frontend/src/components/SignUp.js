@@ -40,6 +40,7 @@ const SignUp = (props) => {
     }
     const response = await props.createUser(newUser)
     if(response && !response.success){
+      console.log(response)
       response.errors.map(error=> {
         errorsInput[error.context.label]=error.message
         return false

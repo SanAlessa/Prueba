@@ -35,6 +35,7 @@ const userActions = {
           }
         })
         dispatch({type: 'LOG_USER', payload: {response: {...response.data.response}}})
+        console.log(response)
       }catch(err){
         // Evalua el estado del error 401 (unauthorized)
         if(err.response.status === 401) {

@@ -8,7 +8,8 @@ const userController = {
     const {firstname, lastname, username, country, email, image, password, rol} = req.body
     const userExists = await User.findOne({username: username})
     if(userExists){
-      errors.push("This user it's already been taken")
+      var error = {context: {label: 'username'}, message: 'This user is already been takenm'}
+      errors.push(error)
     }
     if(errors.length === 0){
       const passwordHashed = bcryptjs.hashSync(password, 10)
@@ -21,7 +22,7 @@ const userController = {
     }
     return res.json({success: errors.length === 0 ? true : false,
                     errors: errors,
-                    response: errors.length === 0 && {token, name: newUserSaved.firstname, pic: newUserSaved.image, username: newUserSaved.username}})
+                    response: errors.length === 0 && {token, name: newUserSaved.firstname, pic: newUserSaved.image, username: newUserSaved.username, id: newUserSaved._id}})
   },
   
   logIn: async (req, res) => {
@@ -35,11 +36,11 @@ const userController = {
       return res.json({success: false, response: 'Username or password are not correct'})
     }
     var token = jwt.sign({...userExists}, process.env.SECRET_KEY, {})
-    return res.json({success:true, response: {token, name: userExists.firstname, pic: userExists.image, username: userExists.username}})
+    return res.json({success:true, response: {token, name: userExists.firstname, pic: userExists.image, username: userExists.username, id: userExists._id}})
   },
 
   logFromLStorage: async (req, res) => {
-    res.json({succes: true, response: {token: req.body.token, name: req.user.firstname, pic: req.user.image, username: req.user.username}})
+    res.json({succes: true, response: {token: req.body.token, name: req.user.firstname, pic: req.user.image, username: req.user.username, id: req.user._id}})
   }
 } 
 

@@ -24,7 +24,7 @@ const Itinerary = (props) => {
   const [visible, setVisible] = useState(false)
   const { title, userPic, userName, hours, likes, price, hashtag, activities, comments, _id } = props.itinerary
   const [comment, setComment] = useState('')
-  const [like, setLike] = useState(false)
+  const [liked, setLiked] = useState('')
 
   const sendComment = async (e) => {
     await props.addComment(comment, localStorage.getItem('token'), _id)
@@ -32,11 +32,16 @@ const Itinerary = (props) => {
     document.getElementById('inputComment').value=''
   }
 
-  const likeFunction =async()=> {
-    setLike(!like)
-    !like ? await props.like(_id, localStorage.getItem('token')) : await props.dislike(_id, localStorage.getItem('token'))
+  const addLike =async()=> {
+    await props.like(_id, localStorage.getItem('token'))
     props.getItineraries(props.id)
   }
+  const dislike =async()=> {
+    await props.dislike(_id, localStorage.getItem('token'))
+    props.getItineraries(props.id)
+    console.log(dislike)
+  }
+
 
   return (
   <div className="itinerary" style={{backgroundImage: 'url("../assets/simpleshiny.svg")'}}>
@@ -46,14 +51,14 @@ const Itinerary = (props) => {
       <h5>{userName}</h5>
     </div>
     <div className="itineraryInfo">
-      <button style={{marginRight: '1vw'}} onClick={likeFunction}>{like ? 'Dislike' : 'Like'}</button>
-      <p className="likes">Likes: {likes.length ===0 
-      ? <FontAwesomeIcon style={{color:  'rgba(202, 0, 0)'}} icon={heartIconDefinition}/> 
-      : <FontAwesomeIcon style={{color: 'rgba(202, 0, 0)'}} icon={faHeart}/> } {likes.length}</p>
+      <p className="likes">
+      {likes.includes(props.loggedUser.response.id) 
+      ?<FontAwesomeIcon onClick={dislike} style={{color: 'rgba(202, 0, 0)', marginRight: '5px'}} icon={faHeart}/> 
+      :<FontAwesomeIcon onClick={addLike} style={{color:  'rgba(202, 0, 0)', marginRight: '5px'}} icon={heartIconDefinition}/>}{likes.length}</p>
       <p style={{marginLeft: '1vw'}}>Duration: {hours} hours</p>
       {/* Metodo Array me permite crear un array de x cantidad de posiciones(indicadas en el param) que no tienen valor pero nos permite mapear por esa cierta cantidad de posiciones */}
       <p style={{marginLeft: '1vw'}}>Price:{[...Array(price)].map((m, i) => {
-        return (<FontAwesomeIcon key={i} style={{marginLeft: '10px', color: 'green'}} icon={faMoneyBillAlt} />)})} </p>
+        return (<FontAwesomeIcon key={i} style={{marginLeft: '10px', color: 'lightgreen'}} icon={faMoneyBillAlt} />)})} </p>
     </div>
     {hashtag.map(hasthag => { return <p key={hasthag}>{hasthag}</p>})}
     {visible && (
@@ -82,7 +87,7 @@ const Itinerary = (props) => {
 
 const mapStateToProps = state => {
   return {
-    commentAdded: state.commentR.comment
+    loggedUser: state.userR.userLogged
   }
 }
 

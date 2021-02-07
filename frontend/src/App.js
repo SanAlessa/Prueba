@@ -25,8 +25,7 @@ function App(props) {
       <Route exact path="/cities" component={Cities}/>
       <Route path="/cities/:id" component={City}/>
       <Route path="/signup" component={SignUp}/>
-      <Route path="/login" component={LogIn}/>
-      <Redirect to="/"/>
+      <Redirect to="/cities"/>
     </Switch>
    </>
  }else if(localStorage.getItem('token')){
