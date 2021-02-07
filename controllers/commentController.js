@@ -2,16 +2,14 @@ const Itinerary = require('../models/Itinerary')
 
 const commentController = {
   addComment: (req,res) => {
-    const userId = req.user._id
     const id = req.body.id
+    console.log(req.user)
     Itinerary.findOneAndUpdate(
       {_id: id},
-      {$push: {comments: {userPic: req.user.image, userName: req.user.username, comment: req.body.comment}}},
+      {$push: {comments: {userPic: req.user.image, userName: req.user.username, comment: req.body.comment, }}},
       {new: true}
     )
-    .then( async comment => {
-      const commentPopulated = await comment.populate('userId').execPopulate()
-      res.json({success: true, response: commentPopulated})})
+    .then(comment => res.json({success: true, response: comment}))
     .catch(error => res.json({success: false, error}))
   },
 

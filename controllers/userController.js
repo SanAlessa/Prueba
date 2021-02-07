@@ -21,7 +21,7 @@ const userController = {
     }
     return res.json({success: errors.length === 0 ? true : false,
                     errors: errors,
-                    response: errors.length === 0 && {token, name: newUserSaved.firstname, pic: newUserSaved.image}})
+                    response: errors.length === 0 && {token, name: newUserSaved.firstname, pic: newUserSaved.image, username: newUserSaved.username}})
   },
   
   logIn: async (req, res) => {
@@ -35,11 +35,11 @@ const userController = {
       return res.json({success: false, response: 'Username or password are not correct'})
     }
     var token = jwt.sign({...userExists}, process.env.SECRET_KEY, {})
-    return res.json({success:true, response: {token, name: userExists.firstname, pic: userExists.image}})
+    return res.json({success:true, response: {token, name: userExists.firstname, pic: userExists.image, username: userExists.username}})
   },
 
   logFromLStorage: async (req, res) => {
-    res.json({succes: true, response: {token: req.body.token, name: req.user.firstname, pic: req.user.image}})
+    res.json({succes: true, response: {token: req.body.token, name: req.user.firstname, pic: req.user.image, username: req.user.username}})
   }
 } 
 

@@ -3,14 +3,15 @@ import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { connect } from "react-redux"
 import commentActions from "../redux/actions/commentActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 
 const Comment =(props)=> {
   const {userName, comment} = props.comments
   const [visible, setVisible] = useState(false)
   const [updatedComment, setUpdatedComment] = useState('')
-  
+  const [loggedUser, setLoggedUser] = useState('')
+
   const edit =(e)=> {
     setVisible(!visible)  
     setUpdatedComment(comment)
@@ -26,6 +27,11 @@ const Comment =(props)=> {
     await props.deleteComment(props.comments._id, props.id, localStorage.getItem('token'))
     props.getItineraries(props.cityId)
   }
+  useEffect(() => {
+    if(props.loggedUser){
+      setLoggedUser(props.loggedUser.response.username)
+    }
+  }, [])
 
   return (
     <div className="comment">
@@ -42,11 +48,21 @@ const Comment =(props)=> {
       </>
       }
       </div>
+      {loggedUser === props.comments.userName && (
+      <>
       <button onClick={edit}> edit </button>
       <button onClick={deleteComment}> delete </button>
+      </>
+      )}
     </div>
 
   )
+}
+
+const mapStateToProps = state => {
+  return {
+    loggedUser: state.userR.userLogged
+  }
 }
 
 const mapDispatchToProps = {
@@ -55,4 +71,4 @@ const mapDispatchToProps = {
   updateComment: commentActions.updateComment
 }
 
-export default connect(null, mapDispatchToProps)(Comment)
+export default connect(mapStateToProps, mapDispatchToProps)(Comment)

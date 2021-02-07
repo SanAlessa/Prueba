@@ -8,12 +8,13 @@ import {
   findIconDefinition
 } from '@fortawesome/fontawesome-svg-core'
 import './FonAwesomIcons'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Activity from './Activity'
 import Comment from './Comment'
 import { connect } from "react-redux"
 import commentActions from "../redux/actions/commentActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
+import likeActions from "../redux/actions/likeActions"
 
 
 const heartLookup: IconLookup = { prefix: 'far', iconName: 'heart' }
@@ -23,8 +24,7 @@ const Itinerary = (props) => {
   const [visible, setVisible] = useState(false)
   const { title, userPic, userName, hours, likes, price, hashtag, activities, comments, _id } = props.itinerary
   const [comment, setComment] = useState('')
-
-  console.log(_id)
+  const [like, setLike] = useState(false)
 
   const sendComment = async (e) => {
     await props.addComment(comment, localStorage.getItem('token'), _id)
@@ -32,6 +32,11 @@ const Itinerary = (props) => {
     document.getElementById('inputComment').value=''
   }
 
+  const likeFunction =async()=> {
+    setLike(!like)
+    !like ? await props.like(_id, localStorage.getItem('token')) : await props.dislike(_id, localStorage.getItem('token'))
+    props.getItineraries(props.id)
+  }
 
   return (
   <div className="itinerary" style={{backgroundImage: 'url("../assets/simpleshiny.svg")'}}>
@@ -41,9 +46,10 @@ const Itinerary = (props) => {
       <h5>{userName}</h5>
     </div>
     <div className="itineraryInfo">
-      <p className="likes">Likes: {likes ===0 
+      <button style={{marginRight: '1vw'}} onClick={likeFunction}>{like ? 'Dislike' : 'Like'}</button>
+      <p className="likes">Likes: {likes.length ===0 
       ? <FontAwesomeIcon style={{color:  'rgba(202, 0, 0)'}} icon={heartIconDefinition}/> 
-      : <FontAwesomeIcon style={{color: 'rgba(202, 0, 0)'}} icon={faHeart}/> } {likes}</p>
+      : <FontAwesomeIcon style={{color: 'rgba(202, 0, 0)'}} icon={faHeart}/> } {likes.length}</p>
       <p style={{marginLeft: '1vw'}}>Duration: {hours} hours</p>
       {/* Metodo Array me permite crear un array de x cantidad de posiciones(indicadas en el param) que no tienen valor pero nos permite mapear por esa cierta cantidad de posiciones */}
       <p style={{marginLeft: '1vw'}}>Price:{[...Array(price)].map((m, i) => {
@@ -84,6 +90,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   addComment: commentActions.addComment,
   getItineraries: itinerariesActions.getItineraries,
+  like: likeActions.like,
+  dislike: likeActions.dislike
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

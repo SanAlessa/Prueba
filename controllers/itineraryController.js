@@ -9,7 +9,7 @@ const itineraryController = {
   },
 
   addItinerary: (req, res) => {
-    const {title, userPic, userName, likes, hours, price, hashtag, activities, comments} = req.body
+    const {cityId, title, userPic, userName, likes, hours, price, hashtag, activities, comments} = req.body
     const saveItinerary = new Itinerary({
       cityId, title, userPic, userName, likes, hours, price, hashtag, activities, comments
     })
@@ -33,6 +33,13 @@ const itineraryController = {
     Itinerary.findByIdAndUpdate(id, req.body)
     .then(itineraryUpdated => {res.json({succes: true, itineraryUpdated})})
     .catch(error => {res.json({succes: false, error})})
+  },
+
+  deleteItinerary: async (req, res)=> {
+    const id = req.params.id
+    await Itinerary.findByIdAndRemove(id)
+    .then(response => res.json({success: true, response:response}))
+    .catch(error => res.json({success: false, error}))
   }
 }
 
