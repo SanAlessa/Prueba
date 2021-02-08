@@ -10,20 +10,25 @@ import {
   NavItem
 } from 'reactstrap';
 import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 import userActions from '../redux/actions/userActions';
+import toast from 'react-hot-toast';
+
 
 const Header = (props)=>{
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
+  const logout =()=> {
+    props.logOut()
+    toast('See you later, alligator')
+  }
   
   if(props.userLogged){
     var links = 
     <>
       <NavItem>
-        <NavLink to="/logIn" className="signupBtn" onClick={()=> props.logOut()}>Log Out</NavLink>
+        <NavLink to="/logIn" className="signupBtn" onClick={logout}>Log Out</NavLink>
       </NavItem>
     </>
   }else {
@@ -40,6 +45,7 @@ const Header = (props)=>{
   return (
     <>
     {/* LLAMA AL COMPARADOR DE RUTA */}
+
     <PathComparator/>
     <div id="header" className="principalHeader">
       <Navbar color="faded" light expand="md">

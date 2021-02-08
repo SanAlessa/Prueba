@@ -5,7 +5,7 @@ const commentController = {
     const id = req.body.id
     Itinerary.findOneAndUpdate(
       {_id: id},
-      {$push: {comments: {userPic: req.user.image, userName: req.user.username, comment: req.body.comment, }}},
+      {$push: {comments: {userPic: req.user.image, userName: req.user.username, comment: req.body.comment }}},
       {new: true}
     )
     .then(comment => res.json({success: true, response: comment}))
@@ -16,7 +16,7 @@ const commentController = {
     const commentId = req.body.idComment
     const itineraryId= req.body.idItinerary
     Itinerary.findOneAndUpdate(
-      {_id: itineraryId, 'comments._id': commentId}, // comparo el _id que me otorga mongoose de el itinerario y del comentario con el que le mando desde el front.
+      {_id: itineraryId, 'comments._id': commentId}, // comparo el _id que me otorga mongoose del itinerario y del comentario con el que le mando desde el front.
       {$set: {'comments.$.comment': req.body.comment}},
       {new: true}
     )

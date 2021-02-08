@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
 import {Link} from 'react-router-dom'
 import GoogleLogin from 'react-google-login';
+import toast from "react-hot-toast"
 
 const SignUp = (props) => {
   const [countries, setCountries] = useState([])
@@ -23,7 +24,7 @@ const SignUp = (props) => {
     const prop = e.target.name
     setNewUser({
       ...newUser,
-      [prop]: value
+      [prop]: value,
     })
   }
 
@@ -36,40 +37,42 @@ const SignUp = (props) => {
     if(newUser.firstname === '' || newUser.lastname === '' || newUser.email === '' 
     || newUser.username === '' || newUser.password === '' 
     || newUser.image === '' || newUser.country === ''){
-      alert("All the fields can't be empty")
+      toast.error("All the fields must be filled")
     }
     const response = await props.createUser(newUser)
     if(response && !response.success){
-      console.log(response)
       response.errors.map(error=> {
         errorsInput[error.context.label]=error.message
         return false
       })
       setErrors(errorsInput)
+      console.log(errorsInput)
+      console.log('hola')
     }else {
-      alert('Usuario Creado!')
+      toast.success('User created')
     }
   }
   
   const responseGoogle =async (response)=> {
     if(response.error){
-      alert('Ups, something went wrong')
+      toast.error('Ups, something went wrong')
+    }else{
+      const res = await props.createUser({
+        username: response.profileObj.givenName,
+        email: response.profileObj.email,
+        firstname: response.profileObj.givenName,
+        lastname: response.profileObj.familyName,
+        image: response.profileObj.imageUrl,
+        password: 'Aa'+response.profileObj.googleId,
+        country: 'Argentina',
+      })
+      if(res && !res.success){
+        toast.error(res.errors[0].message)
+        return false
+      }
     }
-    const res = await props.createUser({
-      username: response.profileObj.givenName,
-      email: response.profileObj.email,
-      firstname: response.profileObj.givenName,
-      lastname: response.profileObj.familyName,
-      image: response.profileObj.imageUrl,
-      password: 'Aa'+response.profileObj.googleId,
-      country: 'Argentina'
-    })
-    if(res && !response.success){
-      setErrors(response.errors)
-    }
-    alert('Usuario Creado!')
+    toast.success('User created')
   }
-
   return(
     <>
     <div className="hero-image-signup" style={{backgroundImage: "url('https://blacklinesandbillables.com/wp-content/uploads/2016/09/notepad-1280x640.jpeg')"}}>
@@ -120,7 +123,6 @@ const SignUp = (props) => {
       </form>
       <button className="createAcc" onClick={()=>validateInfo()}>Create Account</button>
     </div>
-    <Link to="/login"><h5>You already have an account? Log In!</h5></Link>
     <GoogleLogin className="googleBtn"
         clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
         buttonText="Create Account with Google"
@@ -128,6 +130,7 @@ const SignUp = (props) => {
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
       />
+    <Link to="/login"><h5 style={{textAlign: "center"}}>You already have an account? Log In!</h5></Link>
     </>
   )
 }

@@ -1,11 +1,11 @@
-const express = require('express')
-require('dotenv').config()
-const cors = require('cors')
+const express = require('express') //Libreria que nos facilita montar un servidor de manera mas facil
+require('dotenv').config() //En el config se le puede agregar por ej que el dotenv lo haga funcionar en otro archivo.
+const cors = require('cors') //Libreria que nos permite recibir llamados a mi servidor desde cualquier lado
 const router = require('./routes/index')
 require('./config/database')
 // el comando de arriba ejecuta el archivo cuando se carga el sv
 
-const app = express()
+const app = express() // Instancia de express
 
 // MIDDLEWARES
 app.use(cors())

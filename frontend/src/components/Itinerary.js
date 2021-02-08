@@ -8,13 +8,12 @@ import {
   findIconDefinition
 } from '@fortawesome/fontawesome-svg-core'
 import './FonAwesomIcons'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Activity from './Activity'
 import Comment from './Comment'
 import { connect } from "react-redux"
-import commentActions from "../redux/actions/commentActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
-import likeActions from "../redux/actions/likeActions"
+import toast from "react-hot-toast"
 
 
 const heartLookup: IconLookup = { prefix: 'far', iconName: 'heart' }
@@ -26,20 +25,25 @@ const Itinerary = (props) => {
   const [comment, setComment] = useState('')
   const [liked, setLiked] = useState('')
 
+  useEffect(()=> {
+    if(props.loggedUser){
+      setLiked(props.loggedUser.response.id)
+    }
+  },[])
+
   const sendComment = async (e) => {
-    await props.addComment(comment, localStorage.getItem('token'), _id)
+    await props.addComment(comment, props.loggedUser.response.token, _id)
     props.getItineraries(props.id)
     document.getElementById('inputComment').value=''
   }
 
   const addLike =async()=> {
-    await props.like(_id, localStorage.getItem('token'))
+    await props.like(_id, props.loggedUser.response.token)
     props.getItineraries(props.id)
   }
   const dislike =async()=> {
-    await props.dislike(_id, localStorage.getItem('token'))
+    await props.dislike(_id, props.loggedUser.response.token)
     props.getItineraries(props.id)
-    console.log(dislike)
   }
 
 
@@ -50,11 +54,12 @@ const Itinerary = (props) => {
       <div className="userImg" style={{backgroundImage: `url(${userPic})`}}></div>
       <h5>{userName}</h5>
     </div>
+
     <div className="itineraryInfo">
       <p className="likes">
-      {likes.includes(props.loggedUser.response.id) 
-      ?<FontAwesomeIcon onClick={dislike} style={{color: 'rgba(202, 0, 0)', marginRight: '5px'}} icon={faHeart}/> 
-      :<FontAwesomeIcon onClick={addLike} style={{color:  'rgba(202, 0, 0)', marginRight: '5px'}} icon={heartIconDefinition}/>}{likes.length}</p>
+      {likes.includes(liked) 
+      ?<FontAwesomeIcon onClick={props.loggedUser && dislike} style={{color: 'rgba(202, 0, 0)', marginRight: '5px'}} icon={faHeart}/> 
+      :<FontAwesomeIcon onClick={props.loggedUser ? addLike : ()=>toast.error('You have to be logged to like it')} style={{color:  'rgba(202, 0, 0)', marginRight: '5px'}} icon={heartIconDefinition}/>}{likes.length}</p>
       <p style={{marginLeft: '1vw'}}>Duration: {hours} hours</p>
       {/* Metodo Array me permite crear un array de x cantidad de posiciones(indicadas en el param) que no tienen valor pero nos permite mapear por esa cierta cantidad de posiciones */}
       <p style={{marginLeft: '1vw'}}>Price:{[...Array(price)].map((m, i) => {
@@ -71,11 +76,11 @@ const Itinerary = (props) => {
       </div>
       <h4>Leave a comment!</h4>
       <div className="comments">
-      {comments.map(comments => {
-        return <Comment key={comments.comment} comments={comments} id={_id} cityId={props.id}/>})}
+      {comments.map(comment => {
+        return <Comment key={comment.comment} comment={comment} id={_id} cityId={props.id}/>})}
       <div className="inputDiv">
-        <FontAwesomeIcon className="enter" icon={faPaperPlane} id={_id} onClick={sendComment}/>
-        <input type="text" id="inputComment" placeholder="You need to be logged to comment!" onChange={(e)=>setComment(e.target.value)}/>
+        <FontAwesomeIcon className="enter" icon={faPaperPlane} id={_id} onClick={props.loggedUser ? sendComment :()=>toast.error('You must be logged to send a comment')}/>
+        <input type="text" id="inputComment" placeholder={!props.loggedUser ? "You need to be logged to comment!" : "Leave your comment"} disabled={!props.loggedUser && true}onChange={(e)=>setComment(e.target.value)}/>
       </div>
       </div>
     </div>
@@ -93,10 +98,10 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = {
-  addComment: commentActions.addComment,
+  addComment: itinerariesActions.addComment,
   getItineraries: itinerariesActions.getItineraries,
-  like: likeActions.like,
-  dislike: likeActions.dislike
+  like: itinerariesActions.like,
+  dislike: itinerariesActions.dislike
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

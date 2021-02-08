@@ -6,9 +6,9 @@ const userController = {
   signUp: async (req, res) => {
     var errors = []
     const {firstname, lastname, username, country, email, image, password, rol} = req.body
-    const userExists = await User.findOne({username: username})
+    const userExists = await User.findOne({email: email})
     if(userExists){
-      var error = {context: {label: 'username'}, message: 'This user is already been takenm'}
+      var error = {context: {label: 'email'}, message: 'This email is already in use'}
       errors.push(error)
     }
     if(errors.length === 0){
@@ -26,14 +26,14 @@ const userController = {
   },
   
   logIn: async (req, res) => {
-    const {username, password} = req.body
-    const userExists = await User.findOne({username: username})
+    const {email, password} = req.body
+    const userExists = await User.findOne({email: email})
     if(!userExists){
-      return res.json({success:false, response: 'Username or password are not correct'})
+      return res.json({success:false, response: 'Email or password are not correct'})
     }
     const passwordMatches = bcryptjs.compareSync(password, userExists.password)
     if(!passwordMatches){
-      return res.json({success: false, response: 'Username or password are not correct'})
+      return res.json({success: false, response: 'Email or password are not correct'})
     }
     var token = jwt.sign({...userExists}, process.env.SECRET_KEY, {})
     return res.json({success:true, response: {token, name: userExists.firstname, pic: userExists.image, username: userExists.username, id: userExists._id}})

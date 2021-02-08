@@ -10,7 +10,7 @@ module.exports = passport.use(new jwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   // interpretalo a la luz de mi frase secreta
   secretOrKey: process.env.SECRET_KEY
-  // y una vez que lo tengas en el payload, ya interpretado y decodificado
+  // Una vez que ya lo tengas interpretado, decodificado e interpretado en el payload
 }, (payload, done) => {
   // buscame el usuario con este id
   User.findById(payload._doc._id)

@@ -1,28 +1,33 @@
 import axios from 'axios'
-
+import toast from 'react-hot-toast'
 
 const userActions = {
   createUser: (newUser)=> {
     return async (dispatch, getState) => {
-      const response = await axios.post('http://localhost:4000/api/signup', newUser)
-
-      if(!response.data.success){
-        return response.data
+      try {
+        const response = await axios.post('http://localhost:4000/api/signup', newUser)
+        if(!response.data.success){
+          return response.data 
+        }
+        dispatch({type: 'LOG_USER', payload: response.data})
+        console.log(response)
+      }catch(err){
+        toast.error('Oops something went wrong, try again later!')
       }
-      dispatch({type: 'LOG_USER', payload: response.data})
+
     }
   },
   logIn: (user) => {
     return async (dispatch, getState) => {
-      const response = await axios.post('http://localhost:4000/api/login', user)
-
-      if(!response.data.success && response){
-
-        return response.data
+      try {
+        const response = await axios.post('http://localhost:4000/api/login', user)
+        if(!response.data.success){
+          return response.data
+        }
+        dispatch({type: 'LOG_USER', payload: response.data})
+      }catch(err){
+        toast.error('Oops something went wrong, try again later!')
       }
-      console.log(response)
-      dispatch({type: 'LOG_USER', payload: response.data})
-      
     }
   },
 
@@ -39,7 +44,7 @@ const userActions = {
       }catch(err){
         // Evalua el estado del error 401 (unauthorized)
         if(err.response.status === 401) {
-          alert('Me estas cachando...')
+          toast.error("You are not allowed to access this page")
           localStorage.clear()
           return true
         }

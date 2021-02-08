@@ -1,13 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { connect } from "react-redux"
-import commentActions from "../redux/actions/commentActions"
 import itinerariesActions from "../redux/actions/itinerariesActions"
 import { useState, useEffect } from "react"
 
 
 const Comment =(props)=> {
-  const {userName, comment} = props.comments
+  const {userName, comment} = props.comment
   const [visible, setVisible] = useState(false)
   const [updatedComment, setUpdatedComment] = useState('')
   const [loggedUser, setLoggedUser] = useState('')
@@ -18,13 +17,13 @@ const Comment =(props)=> {
   }
 
   const updateComment= async () => {
-    await props.updateComment(updatedComment, props.comments._id, props.id, localStorage.getItem('token'))
+    await props.updateComment(updatedComment, props.comment._id, props.id, props.loggedUser.response.token)
     props.getItineraries(props.cityId)
     setVisible(!visible)
   }
 
   const deleteComment =async()=>{
-    await props.deleteComment(props.comments._id, props.id, localStorage.getItem('token'))
+    await props.deleteComment(props.comment._id, props.id, props.loggedUser.response.token)
     props.getItineraries(props.cityId)
   }
   useEffect(() => {
@@ -48,14 +47,13 @@ const Comment =(props)=> {
       </>
       }
       </div>
-      {loggedUser === props.comments.userName && (
+      {loggedUser === props.comment.userName && (
       <>
       <button onClick={edit}> edit </button>
       <button onClick={deleteComment}> delete </button>
       </>
       )}
     </div>
-
   )
 }
 
@@ -66,9 +64,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  deleteComment: commentActions.deleteComment,
+  deleteComment: itinerariesActions.deleteComment,
   getItineraries: itinerariesActions.getItineraries,
-  updateComment: commentActions.updateComment
+  updateComment: itinerariesActions.updateComment
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comment)

@@ -15,7 +15,7 @@ const validator = {
           "any.required": "This field is required",
           "string.min": "Must contain at least 2 letters",
         }),
-        username: Joi.string().trim().required().messages({
+        username: Joi.string().trim().required().min(4).messages({
           "string.base": "Should be a type of 'text'",
           "string.empty": "This field can't be empty",
           "any.required": "This field is required",

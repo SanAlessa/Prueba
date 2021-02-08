@@ -11,8 +11,8 @@ import LogIn from './components/LogIn'
 import {connect} from 'react-redux'
 import userActions from './redux/actions/userActions'
 import { useState } from 'react'
-import commentActions from './redux/actions/commentActions'
-
+import { Toaster } from 'react-hot-toast';
+import itinerariesActions from './redux/actions/itinerariesActions'
 
 function App(props) {
   const [reload, setReload] = useState(false)
@@ -48,6 +48,7 @@ function App(props) {
 
 return (
   <BrowserRouter>
+    <Toaster/>
     <Route exact path="/" component={Home}/>
     {routes}
     <Footer/>
@@ -63,7 +64,7 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = {
   logInFromLS: userActions.logInFromLS,
-  addComment: commentActions.addComment
+  addComment: itinerariesActions.addComment
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

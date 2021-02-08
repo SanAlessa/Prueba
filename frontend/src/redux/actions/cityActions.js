@@ -1,3 +1,5 @@
+import toast from "react-hot-toast"
+
 const cityActions = {
   getCities: ()=> {
     return async (dispatch, getState) => {
@@ -6,7 +8,7 @@ const cityActions = {
         const data = await response.json()
         dispatch({type: 'GET_CITIES', payload: data.response})
       }catch(error) {
-        console.log(error)
+        toast.error('Oops something went wrong')
       }
     }
   },

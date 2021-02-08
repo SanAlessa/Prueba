@@ -9,18 +9,23 @@ import {
   NavItem
 } from 'reactstrap';
 import { NavLink } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 const CityHeader = ({city, props}) => {
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const {cityPic, cityName} = city
-  const {logOut} = props
+
+  const logout =()=> {
+    props.logOut()
+    toast('See you later, alligator')
+  }
 
   if(props.userLogged){
     var links = 
     <>
       <NavItem>
-        <NavLink to="/login" className="signupBtn" onClick={()=> logOut()}>Log Out</NavLink>
+        <NavLink to="/login" className="signupBtn" onClick={logout}>Log Out</NavLink>
       </NavItem>
     </>
   }else {
@@ -66,9 +71,5 @@ const CityHeader = ({city, props}) => {
     </>
   )
 }
-
-
-
-
 
 export default CityHeader
