@@ -15,7 +15,7 @@ const City =(props)=> {
   const [city, setCity] = useState({})
   const id = props.match.params.id
   const {getItineraries, cities} = props
-
+  
   useEffect(()=> {
     var ciudad = cities.filter(city => city._id === id)
     setCity(ciudad[0])
@@ -23,6 +23,7 @@ const City =(props)=> {
     window.scrollTo(0, 0)
     cities.length=== 0 && props.history.push('/cities')
   }, [])
+
 
   // Funcion async donde incluyo la funcion que en su action tiene un pedido ajax, por ende tiene una promesa y esto me permite utilizar el estado de loadgin.
 
@@ -41,7 +42,7 @@ const City =(props)=> {
     return (
     <>
     <CityHeader city={city} props={props}/>
-    <h3 style={{textAlign: "center"}}>Available Itineraries for {cities.cityName}</h3>
+    <h3 style={{textAlign: "center"}}>Available Itineraries for {city.cityName}</h3>
     <div style={{display: 'flex', justifyContent: 'center'}}>{comparator()}</div>
     {props.allItineraries.map(itinerary => {
       return <Itinerary key={itinerary._id} itinerary={itinerary} id={id}/>

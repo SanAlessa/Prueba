@@ -10,7 +10,7 @@ const itinerariesActions = {
         const data = await response.json()
         dispatch({type: 'GET_ITINERARIES', payload: data.response})
       }catch(error){
-        console.log(error)
+        toast.error('Oops something went wrong, try again later!')
       }
     }
   },
@@ -23,11 +23,10 @@ const itinerariesActions = {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response)
-        dispatch({type: 'ADD_COMMENT', payload: response.data})
+        dispatch({type: 'COMMENT', payload: response.data})
         return true
       }catch(error){
-        toast.error('You have to be logged to send a comment')
+        toast.error('Oops something went wrong, try again later!')
       }
     }
   },
@@ -40,8 +39,7 @@ const itinerariesActions = {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response)
-        dispatch({type: 'UPDATE_COMMENT', action: response.data})
+        dispatch({type: 'COMMENT', payload: response.data})
       }
       catch(error){
         toast.error('Oops something went wrong, try again later!')
@@ -57,8 +55,7 @@ const itinerariesActions = {
             Authorization: 'Bearer '+ token
           }
         })
-        console.log(response)
-        dispatch({type: 'DELETE_COMMENT', payload: response.data})
+        dispatch({type: 'COMMENT', payload: response.data})
       }
       catch(error){
         toast.error('Oops something went wrong, try again later!')
@@ -74,7 +71,6 @@ const itinerariesActions = {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response)
         dispatch({type: 'LIKE', payload: response.data})
       }catch(error){
         toast.error('Oops something went wrong, try again later!')
@@ -91,7 +87,7 @@ const itinerariesActions = {
           }
         })
         console.log(response)
-        dispatch({type: 'DISLIKE', payload: response.data})
+        dispatch({type: 'LIKE', payload: response.data})
       }catch(error){
         toast.error('Oops something went wrong, try again later!')
       }

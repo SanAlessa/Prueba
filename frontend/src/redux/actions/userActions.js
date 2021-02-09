@@ -10,13 +10,13 @@ const userActions = {
           return response.data 
         }
         dispatch({type: 'LOG_USER', payload: response.data})
-        console.log(response)
       }catch(err){
         toast.error('Oops something went wrong, try again later!')
       }
 
     }
   },
+  
   logIn: (user) => {
     return async (dispatch, getState) => {
       try {
@@ -40,7 +40,6 @@ const userActions = {
           }
         })
         dispatch({type: 'LOG_USER', payload: {response: {...response.data.response}}})
-        console.log(response)
       }catch(err){
         // Evalua el estado del error 401 (unauthorized)
         if(err.response.status === 401) {

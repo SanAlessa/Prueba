@@ -12,22 +12,12 @@ const itineraryReducer = (state = initialState, action) => {
     case 'LIKE':
       return {
         ...state,
-        likes: action.payload
+        itineraries: state.itineraries.map(itinerary => itinerary._id === action.payload.response._id ? action.payload.response : itinerary)
       }
-    case 'DISLIKE':
+    case 'COMMENT':
       return {
         ...state,
-        likes: action.paylaod
-      }
-    case 'ADD_COMMENT':
-      return {
-        ...state,
-        comment: action.payload
-      }
-    case 'UPDATE_COMMENT':
-      return{
-        ...state,
-        comment: action.payload
+        itineraries: state.itineraries.map(itinerary => itinerary._id === action.payload.response._id ? action.payload.response : itinerary)
       }
     default:
     return state

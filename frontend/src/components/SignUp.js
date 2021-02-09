@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUser, faEnvelope, faUserTie, faKey, faImage, faGlobeAmericas, faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faEnvelope, faUserTie, faKey, faImage, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons'
 import Header from "./Header"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
@@ -46,8 +46,6 @@ const SignUp = (props) => {
         return false
       })
       setErrors(errorsInput)
-      console.log(errorsInput)
-      console.log('hola')
     }else {
       toast.success('User created')
     }
@@ -82,55 +80,54 @@ const SignUp = (props) => {
     <div className="formContainer" >
       <form className="signUpForm">
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faUser}/>
+          <FontAwesomeIcon className='iconForm' icon={faUser}/>
           <input className="inputForm" type="text" name="firstname" id="fn" placeholder="Enter your first name" onChange={readInput}/>
-          {errors.firstname && <p>{errors.firstname}</p>}
+          <p>{errors.firstname && errors.firstname}</p>
           </div>
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faUser}/>
+          <FontAwesomeIcon className='iconForm' icon={faUser}/>
           <input className="inputForm" type="text" name="lastname" id="ln" placeholder="Enter your last name" onChange={readInput}/>
-          {errors.lastname && <p>{errors.lastname}</p>}
+          <p>{errors.lastname && errors.lastname}</p>
           </div>
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faEnvelope}/>
+          <FontAwesomeIcon className='iconForm' icon={faEnvelope}/>
           <input className="inputForm" type="text" name="email" id="em" placeholder="Enter your email" onChange={readInput}/>
-          {errors.email && <p>{errors.email}</p>}
+          <p>{errors.email && errors.email}</p>
           </div>
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faUserTie}/>
+          <FontAwesomeIcon className='iconForm' icon={faUserTie}/>
           <input className="inputForm" type="text" name="username" id="un" placeholder="Enter your Username" onChange={readInput}/>
-          {errors.username && <p>{errors.username}</p>}
+          <p>{errors.username && errors.username}</p>
           </div>
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faKey}/>
+          <FontAwesomeIcon className='iconForm' icon={faKey}/>
           <input className="inputForm" type="password" name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
-          {errors.password && <p>{errors.password}</p>}
+          <p>{errors.password && errors.password}</p>
           </div>
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faImage}/>
+          <FontAwesomeIcon className='iconForm' icon={faImage}/>
           <input className="inputForm" type="text" name="image" id="img" placeholder="Enter an url img" onChange={readInput}/>
-          {errors.image && <p>{errors.image}</p>}
+          <p>{errors.image && errors.image}</p>
           </div>
         <div className="inputIcon">
-        <FontAwesomeIcon icon={faGlobeAmericas}/>
+        <FontAwesomeIcon className='iconForm' icon={faGlobeAmericas}/>
           <select style={{textAlignLast: 'center'}} className="inputForm" name="country" id="country" onChange={readInput}>
-          {errors.country && <p>{errors.country}</p>}
             <option value="choose" disabled selected >Choose your country</option>
             {countries.map(country => <option value={country.name}>{country.name}</option>)}
+          <p>{errors.country && errors.country}</p>
           </select>
-          <FontAwesomeIcon style={{position: 'absolute', right: '1rem', top: '0.9rem', cursor: 'pointer', zIndex: '1'}} icon={faAngleDown}/>
         </div>
       </form>
       <button className="createAcc" onClick={()=>validateInfo()}>Create Account</button>
     </div>
     <GoogleLogin className="googleBtn"
         clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
-        buttonText="Create Account with Google"
+        buttonText="Sign up with Google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
       />
-    <Link to="/login"><h5 style={{textAlign: "center"}}>You already have an account? Log In!</h5></Link>
+    <Link to="/login"><h5 style={{textAlign: "center", color: '#1A73E8'}}>You already have an account? Log In!</h5></Link>
     </>
   )
 }

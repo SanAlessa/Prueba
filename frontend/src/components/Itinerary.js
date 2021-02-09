@@ -15,7 +15,6 @@ import { connect } from "react-redux"
 import itinerariesActions from "../redux/actions/itinerariesActions"
 import toast from "react-hot-toast"
 
-
 const heartLookup: IconLookup = { prefix: 'far', iconName: 'heart' }
 const heartIconDefinition: IconDefinition = findIconDefinition(heartLookup)
 
@@ -25,6 +24,7 @@ const Itinerary = (props) => {
   const [comment, setComment] = useState('')
   const [liked, setLiked] = useState('')
 
+
   useEffect(()=> {
     if(props.loggedUser){
       setLiked(props.loggedUser.response.id)
@@ -33,17 +33,14 @@ const Itinerary = (props) => {
 
   const sendComment = async (e) => {
     await props.addComment(comment, props.loggedUser.response.token, _id)
-    props.getItineraries(props.id)
-    document.getElementById('inputComment').value=''
+    setComment('')
   }
 
-  const addLike =async()=> {
-    await props.like(_id, props.loggedUser.response.token)
-    props.getItineraries(props.id)
+  const addLike =()=> {
+    props.like(_id, props.loggedUser.response.token)
   }
-  const dislike =async()=> {
-    await props.dislike(_id, props.loggedUser.response.token)
-    props.getItineraries(props.id)
+  const dislike =()=> {
+     props.dislike(_id, props.loggedUser.response.token)
   }
 
 
@@ -59,7 +56,8 @@ const Itinerary = (props) => {
       <p className="likes">
       {likes.includes(liked) 
       ?<FontAwesomeIcon onClick={props.loggedUser && dislike} style={{color: 'rgba(202, 0, 0)', marginRight: '5px'}} icon={faHeart}/> 
-      :<FontAwesomeIcon onClick={props.loggedUser ? addLike : ()=>toast.error('You have to be logged to like it')} style={{color:  'rgba(202, 0, 0)', marginRight: '5px'}} icon={heartIconDefinition}/>}{likes.length}</p>
+      :<FontAwesomeIcon onClick={props.loggedUser ? addLike : ()=>toast.error('You have to be logged to like it')} 
+      style={{color:  'rgba(202, 0, 0)', marginRight: '5px'}} icon={heartIconDefinition}/>}{likes.length}</p>
       <p style={{marginLeft: '1vw'}}>Duration: {hours} hours</p>
       {/* Metodo Array me permite crear un array de x cantidad de posiciones(indicadas en el param) que no tienen valor pero nos permite mapear por esa cierta cantidad de posiciones */}
       <p style={{marginLeft: '1vw'}}>Price:{[...Array(price)].map((m, i) => {
@@ -77,10 +75,10 @@ const Itinerary = (props) => {
       <h4>Leave a comment!</h4>
       <div className="comments">
       {comments.map(comment => {
-        return <Comment key={comment.comment} comment={comment} id={_id} cityId={props.id}/>})}
+        return <Comment key={comment._id} comment={comment} id={_id} cityId={props.id}/>})}
       <div className="inputDiv">
         <FontAwesomeIcon className="enter" icon={faPaperPlane} id={_id} onClick={props.loggedUser ? sendComment :()=>toast.error('You must be logged to send a comment')}/>
-        <input type="text" id="inputComment" placeholder={!props.loggedUser ? "You need to be logged to comment!" : "Leave your comment"} disabled={!props.loggedUser && true}onChange={(e)=>setComment(e.target.value)}/>
+        <input type="text" id="inputComment" placeholder={!props.loggedUser ? "You need to be logged to comment!" : "Leave your comment"} value={comment}disabled={!props.loggedUser && true}onChange={(e)=>setComment(e.target.value)}/>
       </div>
       </div>
     </div>
@@ -92,14 +90,14 @@ const Itinerary = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loggedUser: state.userR.userLogged
+    loggedUser: state.userR.userLogged,
+    itineraries: state.itinerariesR.itineraries
   }
 }
 
 
 const mapDispatchToProps = {
   addComment: itinerariesActions.addComment,
-  getItineraries: itinerariesActions.getItineraries,
   like: itinerariesActions.like,
   dislike: itinerariesActions.dislike
 }

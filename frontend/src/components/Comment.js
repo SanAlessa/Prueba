@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
+import { faTrashAlt, faEdit, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { connect } from "react-redux"
 import itinerariesActions from "../redux/actions/itinerariesActions"
 import { useState, useEffect } from "react"
+import { faBan } from "@fortawesome/free-solid-svg-icons"
 
 
 const Comment =(props)=> {
@@ -18,13 +19,11 @@ const Comment =(props)=> {
 
   const updateComment= async () => {
     await props.updateComment(updatedComment, props.comment._id, props.id, props.loggedUser.response.token)
-    props.getItineraries(props.cityId)
     setVisible(!visible)
   }
 
   const deleteComment =async()=>{
     await props.deleteComment(props.comment._id, props.id, props.loggedUser.response.token)
-    props.getItineraries(props.cityId)
   }
   useEffect(() => {
     if(props.loggedUser){
@@ -38,21 +37,23 @@ const Comment =(props)=> {
         <h5>{userName}:</h5>
         {visible ?
         <>
-        <input type="text" name="inputComment" onChange={(e)=>setUpdatedComment(e.target.value)} value={updatedComment}/>
-        <button onClick={updateComment}> send </button>
+        <input type="text" onChange={(e)=>setUpdatedComment(e.target.value)} value={updatedComment} 
+        style={{borderRadius: '30px', border: 'none', outline: 'none', textAlign: 'center'}}/>
+        <FontAwesomeIcon icon={faPaperPlane} style={{cursor: 'pointer', marginLeft: '0.5rem'}} onClick={updateComment}/>
+        <FontAwesomeIcon icon={faBan} style={{cursor: 'pointer', marginLeft: '0.5rem'}} onClick={()=>setVisible(!visible)}/>
         </>
-        : <>
-      <p>{comment}</p>
-      <p className="like"><FontAwesomeIcon icon={faThumbsUp}/></p>
-      </>
-      }
+        : <div className="pComment">
+        <p>{comment}</p>
+        {loggedUser === props.comment.userName && 
+        <div>
+        <FontAwesomeIcon icon={faEdit} style={{marginRight: '0.4rem', cursor: 'pointer'}} onClick={edit}/>
+        <FontAwesomeIcon icon={faTrashAlt} style={{cursor: 'pointer'}} onClick={deleteComment}/>
+        </div>
+        }
       </div>
-      {loggedUser === props.comment.userName && (
-      <>
-      <button onClick={edit}> edit </button>
-      <button onClick={deleteComment}> delete </button>
-      </>
-      )}
+      }
+
+      </div>
     </div>
   )
 }

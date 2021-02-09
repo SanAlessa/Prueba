@@ -30,7 +30,7 @@ const LogIn = (props) => {
       toast.error("All the fields must be filled")
     }
     const res = await props.logUser(logUser)
-    if(!res.succes){
+    if(res && !res.success){
       console.log(res.response)
       setErrors(res.response)
     }
@@ -55,15 +55,15 @@ const LogIn = (props) => {
     <div className="formContainer" >
       <form className="signUpForm">
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faUserTie}/>
+          <FontAwesomeIcon className='iconForm' icon={faUserTie}/>
           <input className="inputForm" type="text" name="email" id="un" placeholder="Enter your email" onChange={readInput}/>
           <p>{errors &&  errors}</p>
           </div>
         <div className="inputIcon">
-          <FontAwesomeIcon icon={faKey}/>
+          <FontAwesomeIcon className='iconForm' icon={faKey}/>
           <input className="inputForm" type="password" name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
-          <p>{errors &&  errors}</p>
           </div>
+          <p>{errors &&  errors}</p>
       </form>
       <button className="createAcc" onClick={()=>validateInfo()}>Sign In</button>
     </div>
@@ -74,7 +74,7 @@ const LogIn = (props) => {
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
       />
-    <Link to="/signup"><h5 style={{textAlign:"center"}}>You don't have an account? Sign Up!</h5></Link>
+    <Link to="/signup"><h5 style={{textAlign:"center", color: '#1A73E8'}}>You don't have an account? Sign Up!</h5></Link>
     </>
   )
 }
