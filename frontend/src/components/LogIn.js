@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserTie, faKey} from '@fortawesome/free-solid-svg-icons'
+import { faUserTie, faKey, faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 import Header from "./Header"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
@@ -16,6 +16,7 @@ const LogIn = (props) => {
     password: ''
   })
   const [errors, setErrors] = useState('')
+  const [visible, setVisible] = useState(false)
 
   const readInput =(e)=> {
     const value = e.target.value
@@ -31,8 +32,8 @@ const LogIn = (props) => {
     }
     const res = await props.logUser(logUser)
     if(res && !res.success){
-      console.log(res.response)
       setErrors(res.response)
+      return false
     }
   }
   
@@ -44,6 +45,9 @@ const LogIn = (props) => {
       email: response.profileObj.email,
       password: 'Aa'+response.profileObj.googleId,
     })
+    if(res && !res.succes){
+      toast.error('This google account is not registered')
+    }
   }
 
   return(
@@ -61,13 +65,14 @@ const LogIn = (props) => {
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon className='iconForm' icon={faKey}/>
-          <input className="inputForm" type="password" name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
-          </div>
+          <input className="inputForm" type={visible ? "text" : "password"} name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
+          <FontAwesomeIcon onClick={()=>setVisible(!visible)} icon={visible ? faEyeSlash : faEye} className="eyePw"/>
           <p>{errors &&  errors}</p>
+          </div>
       </form>
       <button className="createAcc" onClick={()=>validateInfo()}>Sign In</button>
     </div>
-      <GoogleLogin className="googleBtn"
+      <GoogleLogin className="googleBtnLogIn"
         clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
         buttonText="Log In with Google"
         onSuccess={responseGoogle}

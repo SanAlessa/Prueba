@@ -24,7 +24,6 @@ function App(props) {
       <Route exact path="/" component={Home}/>
       <Route exact path="/cities" component={Cities}/>
       <Route path="/cities/:id" component={City}/>
-      <Route path="/signup" component={SignUp}/>
       <Redirect to="/cities"/>
     </Switch>
    </>
@@ -37,6 +36,7 @@ function App(props) {
    routes =
    <>
     <Switch>
+      <Route exact path="/" component={Home}/>
       <Route exact path="/cities" component={Cities}/>
       <Route path="/cities/:id" component={City}/>
       <Route path="/signup" component={SignUp}/>

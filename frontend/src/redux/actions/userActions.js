@@ -10,6 +10,7 @@ const userActions = {
           return response.data 
         }
         dispatch({type: 'LOG_USER', payload: response.data})
+        toast.success('Account created successfully!')
       }catch(err){
         toast.error('Oops something went wrong, try again later!')
       }
@@ -25,6 +26,7 @@ const userActions = {
           return response.data
         }
         dispatch({type: 'LOG_USER', payload: response.data})
+        toast.success('Welcome '+response.data.response.name+'!')
       }catch(err){
         toast.error('Oops something went wrong, try again later!')
       }

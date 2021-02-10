@@ -21,7 +21,9 @@ const Header = (props)=>{
 
   const logout =()=> {
     props.logOut()
-    toast('See you later, alligator')
+    toast('See you later, alligator', {
+      icon:'👋',
+    })
   }
   
   if(props.userLogged){

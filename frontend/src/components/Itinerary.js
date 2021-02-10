@@ -29,11 +29,15 @@ const Itinerary = (props) => {
     if(props.loggedUser){
       setLiked(props.loggedUser.response.id)
     }
-  },[])
+  },[props.loggedUser])
 
   const sendComment = async (e) => {
     await props.addComment(comment, props.loggedUser.response.token, _id)
     setComment('')
+  }
+
+  const keyPress=(e)=>{
+    e.key==='Enter' && sendComment()
   }
 
   const addLike =()=> {
@@ -78,7 +82,8 @@ const Itinerary = (props) => {
         return <Comment key={comment._id} comment={comment} id={_id} cityId={props.id}/>})}
       <div className="inputDiv">
         <FontAwesomeIcon className="enter" icon={faPaperPlane} id={_id} onClick={props.loggedUser ? sendComment :()=>toast.error('You must be logged to send a comment')}/>
-        <input type="text" id="inputComment" placeholder={!props.loggedUser ? "You need to be logged to comment!" : "Leave your comment"} value={comment}disabled={!props.loggedUser && true}onChange={(e)=>setComment(e.target.value)}/>
+        <input type="text" id="inputComment" onKeyPress={keyPress} placeholder={!props.loggedUser ? "You need to be logged to comment!" : "Leave your comment"} 
+        value={comment}disabled={!props.loggedUser && true} autoComplete="off" onChange={(e)=>setComment(e.target.value)}/>
       </div>
       </div>
     </div>
@@ -98,6 +103,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   addComment: itinerariesActions.addComment,
+  fastComment: itinerariesActions.fastComment,
   like: itinerariesActions.like,
   dislike: itinerariesActions.dislike
 }

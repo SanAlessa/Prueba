@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUser, faEnvelope, faUserTie, faKey, faImage, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faEnvelope, faUserTie, faKey, faImage, faGlobeAmericas, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import Header from "./Header"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
@@ -15,6 +15,7 @@ const SignUp = (props) => {
     firstname: '', lastname: '', email: '', username: '', password: '', image: '', country: ''
   })
   const [errors, setErrors] = useState({})
+  const [visible, setVisible] = useState(false)
   const errorsInput = {
     firstname: null, lastname: null, email: null, username: null, password: null, image: null, country: null
   }
@@ -46,8 +47,6 @@ const SignUp = (props) => {
         return false
       })
       setErrors(errorsInput)
-    }else {
-      toast.success('User created')
     }
   }
   
@@ -56,7 +55,7 @@ const SignUp = (props) => {
       toast.error('Ups, something went wrong')
     }else{
       const res = await props.createUser({
-        username: response.profileObj.givenName,
+        username: response.profileObj.givenName+' '+response.profileObj.familyName,
         email: response.profileObj.email,
         firstname: response.profileObj.givenName,
         lastname: response.profileObj.familyName,
@@ -65,11 +64,10 @@ const SignUp = (props) => {
         country: 'Argentina',
       })
       if(res && !res.success){
-        toast.error(res.errors[0].message)
+        toast.error('This google account is already registered, please Log In')
         return false
       }
     }
-    toast.success('User created')
   }
   return(
     <>
@@ -101,7 +99,8 @@ const SignUp = (props) => {
           </div>
         <div className="inputIcon">
           <FontAwesomeIcon className='iconForm' icon={faKey}/>
-          <input className="inputForm" type="password" name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
+          <input className="inputForm" type={visible ? "text" : "password"} name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
+          <FontAwesomeIcon onClick={()=>setVisible(!visible)} icon={visible ? faEyeSlash : faEye} className="eyePw"/>
           <p>{errors.password && errors.password}</p>
           </div>
         <div className="inputIcon">
@@ -112,10 +111,10 @@ const SignUp = (props) => {
         <div className="inputIcon">
         <FontAwesomeIcon className='iconForm' icon={faGlobeAmericas}/>
           <select style={{textAlignLast: 'center'}} className="inputForm" name="country" id="country" onChange={readInput}>
-            <option value="choose" disabled selected >Choose your country</option>
-            {countries.map(country => <option value={country.name}>{country.name}</option>)}
-          <p>{errors.country && errors.country}</p>
+            <option value="choose" >Choose your country</option>
+            {countries.map(country => <option key={country.name} value={country.name}>{country.name}</option>)}
           </select>
+          <p>{errors.country && 'You have to choose your country'}</p>
         </div>
       </form>
       <button className="createAcc" onClick={()=>validateInfo()}>Create Account</button>

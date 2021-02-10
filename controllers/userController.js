@@ -26,6 +26,7 @@ const userController = {
   },
   
   logIn: async (req, res) => {
+    var errors = []
     const {email, password} = req.body
     const userExists = await User.findOne({email: email})
     if(!userExists){

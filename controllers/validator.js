@@ -39,7 +39,7 @@ const validator = {
         password: Joi.string().trim().required().pattern(/(?=.*\d\d)(?=.*[A-Z])(?=.*[a-z])(?!.*[!"#$%&/()=?¡¨*^\][;:_])(?!.*\s).{4,}/).min(4).messages({
           "string.empty": "This field can't be empty",
           "any.required": "This field is required",
-          "string.pattern.base": "This must contain an uppercase letter, a lowercase and two numbers.",
+          "string.pattern.base": 'The password should be, e.g., "Aa00"',
           "string.min": "Must contain at least four characters",
         }),
         rol: Joi.string().trim()

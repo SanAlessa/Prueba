@@ -533,6 +533,17 @@ a.toItinerary {
   margin-right: 0.4vw;
 }
 
+.updateComment {
+  border: none;
+  outline: none; 
+  text-align: center; 
+  background-color: #7DBCFF;
+  border-bottom: 1px solid black;
+  border-bottom-left-radius: 0%;
+  border-bottom-right-radius: 0%;
+}
+
+
 .like {
   position: absolute;
   bottom: 0;
@@ -662,7 +673,7 @@ a.toItinerary {
 .formContainer {
   display: flex;
   flex-direction: column;
-  width: 35vw;
+  width: 30vw;
   margin: auto auto;
   border-radius: 20px;
   background-color: #FFFFFF;
@@ -672,12 +683,8 @@ a.toItinerary {
 .signUpForm {
   display: flex;
   flex-direction: column;
-  margin: 2vh auto;
+  margin: 1vh auto;
 }
-
-.signUpForm p {
-}
-
 
 .inputForm {
   font-size: 1.2rem;
@@ -685,7 +692,7 @@ a.toItinerary {
   border: 1px solid #1A73E8;
   text-align: center;
   outline: none;
-  color: black;
+  color: grey;
   width: 20vw;
   height: 3vh;
 }
@@ -695,15 +702,25 @@ a.toItinerary {
   margin-right: 1vw;
 }
 .inputForm::placeholder { 
-  color: white; 
+  color: grey; 
 }
 
 .inputIcon {
   position: relative;
   margin: 1.5vh;
 }
+
+.eyePw {
+  position: absolute;
+  top: 30%;
+  right: 2%;
+  color: #1A73E8;
+}
+
 .inputIcon p {
   position: absolute;
+  color: rgb(165, 0, 0);
+  left: 10%;
 }
 select {
   cursor: pointer;
@@ -717,7 +734,8 @@ select {
   outline: none !important;
   padding: 0.5vh;
   transition: 0.5s;
-  margin: 1vh auto;
+  margin: 0vh auto;
+  margin-bottom: 2vh;
   background-color: #1A73E8;
   color: white
 }
@@ -726,11 +744,19 @@ select {
   transform: scale(0.9);
 }
 
-.googleBtn {
-  margin: auto;
+.googleBtn, .googleBtnLogIn {
+  margin: 2vh auto;
   width: 12vw;
+}
+
+.googleBtnLogIn {
+  margin: 0vh auto;
+  margin-bottom: 4vh;
+}
+
+.googleBtn span, .googleBtnLogIn span {
   color: black;
-  text-align: center;
+  margin: auto;
 }
 
 

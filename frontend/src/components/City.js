@@ -22,7 +22,7 @@ const City =(props)=> {
     fetchData()
     window.scrollTo(0, 0)
     cities.length=== 0 && props.history.push('/cities')
-  }, [])
+  }, [cities, id, props.history])
 
 
   // Funcion async donde incluyo la funcion que en su action tiene un pedido ajax, por ende tiene una promesa y esto me permite utilizar el estado de loadgin.
