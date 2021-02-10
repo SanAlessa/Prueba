@@ -516,6 +516,16 @@ a.toItinerary {
   position: relative;
 }
 
+.imgUser{
+  width: 6vh;
+  height: 6vh;
+  background-position: center;
+  background-size: cover;
+  border-radius: 100%;
+  margin-left: 1vw;
+  margin-top: 1vh;
+}
+
 .comment h5{
   padding: 0vh 1vw;
   font-size: 1rem;

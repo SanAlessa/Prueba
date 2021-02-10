@@ -31,8 +31,9 @@ const Itinerary = (props) => {
     }
   },[props.loggedUser])
 
-  const sendComment = async (e) => {
-    await props.addComment(comment, props.loggedUser.response.token, _id)
+  const sendComment = (e) => {
+    comments.push({userPic:props.loggedUser.response.pic, userName: props.loggedUser.response.username, comment: comment, _id:props.loggedUser.response.id})
+    props.addComment(comment, props.loggedUser.response.token, _id)
     setComment('')
   }
 
@@ -40,14 +41,14 @@ const Itinerary = (props) => {
     e.key==='Enter' && sendComment()
   }
 
-  const addLike =()=> {
-    props.like(_id, props.loggedUser.response.token)
+  const addLike =async ()=> {
+   props.like(_id, props.loggedUser.response.token)
   }
   const dislike =()=> {
      props.dislike(_id, props.loggedUser.response.token)
   }
 
-
+  console.log(likes)
   return (
   <div className="itinerary" style={{backgroundImage: 'url("../assets/simpleshiny.svg")'}}>
     <h3 style={{marginTop: '2vh'}}>{title}</h3>
@@ -103,7 +104,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   addComment: itinerariesActions.addComment,
-  fastComment: itinerariesActions.fastComment,
+  getItineraries: itinerariesActions.getItineraries,
   like: itinerariesActions.like,
   dislike: itinerariesActions.dislike
 }

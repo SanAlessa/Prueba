@@ -37,7 +37,7 @@ const itineraryController = {
 
   deleteItinerary: async (req, res)=> {
     const id = req.params.id
-    await Itinerary.findByIdAndRemove(id)
+    await Itinerary.findByIdAndRemove(id, {new: true})
     .then(response => res.json({success: true, response:response}))
     .catch(error => res.json({success: false, error}))
   }

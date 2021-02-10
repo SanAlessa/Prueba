@@ -7,7 +7,7 @@ import { faBan } from "@fortawesome/free-solid-svg-icons"
 
 
 const Comment =(props)=> {
-  const {userName, comment} = props.comment
+  const {userName, comment, userPic} = props.comment
   const [visible, setVisible] = useState(false)
   const [updatedComment, setUpdatedComment] = useState('')
   const [loggedUser, setLoggedUser] = useState('')
@@ -38,6 +38,7 @@ const Comment =(props)=> {
 
   return (
     <div className="comment">
+      <div className="imgUser" style={{backgroundImage: `url(${userPic})`}}></div>
       <div className="commentContent">
         <h5>{userName}:</h5>
         {visible ?

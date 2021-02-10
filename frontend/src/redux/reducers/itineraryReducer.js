@@ -1,5 +1,5 @@
 const initialState = {
-  itineraries: [],
+  itineraries: []
 }
 
 const itineraryReducer = (state = initialState, action) => {

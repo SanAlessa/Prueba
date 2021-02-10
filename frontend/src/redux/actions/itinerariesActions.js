@@ -14,11 +14,7 @@ const itinerariesActions = {
       }
     }
   },
-  fastComment: (comment, _id) => {
-    return (dispatch, getState) => {
-      dispatch({type: 'FAST_COMMENT', payload:{comment, _id}})
-    }
-  },
+
 
   addComment: (comment, token, id) => {
     return async (dispatch, getState) => {
