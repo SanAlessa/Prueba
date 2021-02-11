@@ -1,13 +1,16 @@
 const initialState = {
-  itineraries: []
+  itineraries: [],
+  loading: true
 }
 
 const itineraryReducer = (state = initialState, action) => {
   switch(action.type){
     case 'GET_ITINERARIES':
+      console.log(action.payload.length)
       return {
         ...state,
-        itineraries: action.payload
+        itineraries: action.payload,
+        loading: action.payload >0 && false
       }
     case 'LIKE':
       return {

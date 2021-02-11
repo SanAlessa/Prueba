@@ -19,17 +19,13 @@ const City =(props)=> {
   useEffect(()=> {
     var ciudad = cities.filter(city => city._id === id)
     setCity(ciudad[0])
-    fetchData()
+    getItineraries(id)
     window.scrollTo(0, 0)
     cities.length=== 0 && props.history.push('/cities')
-  }, [cities, id, props.history])
+    setLoading(props.loadingReducer)
+  }, [cities, id, getItineraries, props.history,props.loadingReducer])
 
   // Funcion async donde incluyo la funcion que en su action tiene un pedido ajax, por ende tiene una promesa y esto me permite utilizar el estado de loadgin.
-
-  const fetchData = async () => {
-    await getItineraries(id)
-    setLoading(false)
-    }
 
   const comparator=()=>{
     if(loading) {
@@ -38,6 +34,7 @@ const City =(props)=> {
       return <NoItineraries/>
     }
   }
+
     return (
     <>
     <CityHeader city={city} props={props}/>
@@ -55,7 +52,8 @@ const mapStateToProps = (state) => {
   return {
     cities: state.citiesR.cities,
     allItineraries: state.itinerariesR.itineraries,
-    userLogged: state.userR.userLogged
+    userLogged: state.userR.userLogged,
+    loadingReducer: state.itinerariesR.loading
   }
 }
 const mapDispatchToProps = {
