@@ -49,7 +49,6 @@ function App(props) {
 return (
   <BrowserRouter>
     <Toaster/>
-    <Route exact path="/" component={Home}/>
     {routes}
     <Footer/>
   </BrowserRouter>

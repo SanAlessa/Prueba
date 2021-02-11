@@ -6,7 +6,6 @@ const initialState = {
 const itineraryReducer = (state = initialState, action) => {
   switch(action.type){
     case 'GET_ITINERARIES':
-      console.log(action.payload.length)
       return {
         ...state,
         itineraries: action.payload,
