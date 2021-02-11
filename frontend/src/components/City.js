@@ -24,7 +24,6 @@ const City =(props)=> {
     cities.length=== 0 && props.history.push('/cities')
   }, [cities, id, props.history])
 
-  console.log(props.allItineraries)
   // Funcion async donde incluyo la funcion que en su action tiene un pedido ajax, por ende tiene una promesa y esto me permite utilizar el estado de loadgin.
 
   const fetchData = async () => {

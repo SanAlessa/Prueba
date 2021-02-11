@@ -18,7 +18,9 @@ const CityHeader = ({city, props}) => {
 
   const logout =()=> {
     props.logOut()
-    toast('See you later, alligator')
+    toast('See you later, alligator', {
+      icon:'👋',
+    })
   }
 
   if(props.userLogged){
@@ -59,7 +61,7 @@ const CityHeader = ({city, props}) => {
             </Collapse>
         </Navbar>
         <div style={{display: 'flex', alignItems: 'center'}}>
-          {props.userLogged && <h2 style={{color: 'white'}}>Hi! Welcome, {props.userLogged.response.name}</h2>}
+          {props.userLogged && <h2 style={{color: 'white'}}>Hi! {props.userLogged.response.name}</h2>}
           <div className="imgLogIn" id="imgLogin" style={{backgroundImage: `url(${props.userLogged ? props.userLogged.response.pic : '../assets/login1.png'})`}} alt="Login img" />
         </div>
       </div>

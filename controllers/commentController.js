@@ -17,7 +17,7 @@ const commentController = {
     const commentId = req.body.idComment
     const itineraryId= req.body.idItinerary
     Itinerary.findOneAndUpdate(
-      {_id: itineraryId, 'comments._id': commentId}, // comparo el _id que me otorga mongoose del itinerario y del comentario con el que le mando desde el front.
+      {_id: itineraryId, 'comments._id': commentId}, // comparo el _id que me otorga mongoose del itinerario y del subdocumento comentario con el que le mando desde el front.
       {$set: {'comments.$.comment': req.body.comment}},
       {new: true}
     )

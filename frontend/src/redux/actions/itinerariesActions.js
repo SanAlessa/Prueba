@@ -18,6 +18,7 @@ const itinerariesActions = {
 
   addComment: (comment, token, id) => {
     return async (dispatch, getState) => {
+      getState()
       try {
         const response = await axios.post('http://localhost:4000/api/comments', {comment, token, id} , {
           headers: {
@@ -87,7 +88,6 @@ const itinerariesActions = {
             Authorization: 'Bearer ' +token
           }
         })
-        console.log(response)
         dispatch({type: 'LIKE', payload: response.data})
       }catch(error){
         toast.error('Oops something went wrong, try again later!')

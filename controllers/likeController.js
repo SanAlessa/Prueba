@@ -9,7 +9,7 @@ const likeController = {
       {$addToSet: {likes: userId}},
       {new: true}
     )
-    .then(like => {res.json({success:true, response: like})})
+    .then(like => res.json({success:true, response: like}))
     .catch(error => res.json({success: false, error}))
   },
 

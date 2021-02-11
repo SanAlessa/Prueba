@@ -32,9 +32,12 @@ const Itinerary = (props) => {
   },[props.loggedUser])
 
   const sendComment = (e) => {
-    comments.push({userPic:props.loggedUser.response.pic, userName: props.loggedUser.response.username, comment: comment, _id:props.loggedUser.response.id})
-    props.addComment(comment, props.loggedUser.response.token, _id)
-    setComment('')
+    if(comment.trim().length >0){
+      comments.push({userPic:props.loggedUser.response.pic, 
+        userName: props.loggedUser.response.username, comment: comment, _id:props.loggedUser.response.id})
+      props.addComment(comment, props.loggedUser.response.token, _id)
+      setComment('')
+    }
   }
 
   const keyPress=(e)=>{
@@ -48,7 +51,6 @@ const Itinerary = (props) => {
      props.dislike(_id, props.loggedUser.response.token)
   }
 
-  console.log(likes)
   return (
   <div className="itinerary" style={{backgroundImage: 'url("../assets/simpleshiny.svg")'}}>
     <h3 style={{marginTop: '2vh'}}>{title}</h3>

@@ -65,10 +65,10 @@ const Header = (props)=>{
             </Collapse>
         </Navbar>
         <div>
-          <img id="logo" src="../assets/logo.png" alt="logo" style={{visibility: 'hidden', width: '4vw', marginLeft: '-5vw', minWidth: '50px'}}/>
+          <img id="logo" src="../assets/logo.png" alt="logo" style={{visibility: 'hidden', width: '4vw', marginLeft: '-5vw', minWidth: '66px'}}/>
         </div>
         <div style={{display: 'flex', alignItems: 'center'}}>
-          {props.userLogged && <h2 style={{color: 'white'}}>Hi! Welcome, {props.userLogged.response.name}</h2>}
+          {props.userLogged && <h2 style={{color: 'white'}}>Hi! {props.userLogged.response.name}</h2>}
           <div className="imgLogIn" id="imgLogin" style={{backgroundImage: `url(${props.userLogged ? props.userLogged.response.pic : '../assets/login1.png'})`}} alt="Login img" />
         </div>
     </div>
