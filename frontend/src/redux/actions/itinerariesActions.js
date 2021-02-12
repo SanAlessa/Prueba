@@ -18,16 +18,18 @@ const itinerariesActions = {
 
   addComment: (comment, token, id) => {
     return async (dispatch, getState) => {
+      console.log('en comment llega el :' +token)
       getState()
       try {
-        const response = await axios.post('http://localhost:4000/api/comments', {comment, token, id} , {
+        const response = await axios.post('http://localhost:4000/api/comments', {comment, id} , {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
         dispatch({type: 'COMMENT', payload: response.data})
-        return true
+        console.log(response.data)
       }catch(error){
+        console.log(error)
         toast.error('Oops something went wrong, try again later!')
       }
     }
@@ -36,7 +38,7 @@ const itinerariesActions = {
   updateComment: (comment, idComment, idItinerary, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.put('http://localhost:4000/api/comments/update', {comment, idComment, idItinerary, token}, {
+        const response = await axios.put('http://localhost:4000/api/comments/update', {comment, idComment, idItinerary}, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -52,7 +54,7 @@ const itinerariesActions = {
   deleteComment: (idComment, idItinerary, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.put('http://localhost:4000/api/comments', {idComment, idItinerary, token}, {
+        const response = await axios.put('http://localhost:4000/api/comments', {idComment, idItinerary}, {
           headers: {
             Authorization: 'Bearer '+ token
           }
@@ -68,7 +70,7 @@ const itinerariesActions = {
   like: (id, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.post('http://localhost:4000/api/likes', {token, id}, {
+        const response = await axios.post('http://localhost:4000/api/likes', {id}, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -83,7 +85,7 @@ const itinerariesActions = {
   dislike: (id, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.post('http://localhost:4000/api/dislike', {token, id}, {
+        const response = await axios.post('http://localhost:4000/api/dislike', {id}, {
           headers: {
             Authorization: 'Bearer ' +token
           }

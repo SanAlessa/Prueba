@@ -6,10 +6,11 @@ const commentController = {
     const id = req.body.id
     Itinerary.findOneAndUpdate(
       {_id: id},
-      {$push: {comments: {userPic: req.user.image, userName: req.user.username, comment: req.body.comment }}},
+      {$push: {comments: 
+        {userPic: req.user.image, userName: req.user.username, userLastname: req.user.lastname, comment: req.body.comment, userId: req.user.id }}},
       {new: true}
     )
-    .then(comment => res.json({success: true, response: comment}))
+    .then(itineraryModified => res.json({success: true, response: itineraryModified}))
     .catch(error => res.json({success: false, error}))
   },
 

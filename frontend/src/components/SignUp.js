@@ -75,58 +75,126 @@ const SignUp = (props) => {
       <Header/>
     </div>
     <div className="borderPic"></div>
-    <div className="formContainer" >
-      <form className="signUpForm">
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faUser}/>
-          <input className="inputForm" type="text" name="firstname" id="fn" placeholder="Enter your first name" onChange={readInput}/>
-          <p>{errors.firstname && errors.firstname}</p>
+    <div style={{display: 'flex', position:'relative', marginBottom: '10vh', marginTop: '2vh'}}>
+      <div className="prueba">
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', paddingRight: '16vh', position: 'absolute', right: '7vw', top: '35%'}} >
+          <h1 style={{color: 'white', marginBottom: '3vh'}}>Have an account?</h1>
+          <Link to="/login"><h2 style={{textAlign: "center", color: 'white', width: '6vw', border: '3px solid white', marginRight: '2.5vw'}}>Log In!</h2></Link>
+        </div>   
+      </div>
+      <div className="formContainer" style={{position: 'absolute', backgroundColor: 'white', top: '0', left: '0', right: '0', bottom: '0', marginTop: '-0.2vh'}}>
+        <h1>Sign Up</h1>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faUser}/></div>
+          <div className="form">
+            <input type="text" name="firstname" required autoComplete="off" onChange={readInput}/>
+            <label className="labelInput" htmlFor="firstname">
+              {errors.firstname ?
+              <p>{errors.firstname && errors.firstname}</p>
+              :
+              <span className="contentInput">Firstname</span>
+            }
+            </label>
           </div>
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faUser}/>
-          <input className="inputForm" type="text" name="lastname" id="ln" placeholder="Enter your last name" onChange={readInput}/>
-          <p>{errors.lastname && errors.lastname}</p>
-          </div>
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faEnvelope}/>
-          <input className="inputForm" type="text" name="email" id="em" placeholder="Enter your email" onChange={readInput}/>
-          <p>{errors.email && errors.email}</p>
-          </div>
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faUserTie}/>
-          <input className="inputForm" type="text" name="username" id="un" placeholder="Enter your Username" onChange={readInput}/>
-          <p>{errors.username && errors.username}</p>
-          </div>
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faKey}/>
-          <input className="inputForm" type={visible ? "text" : "password"} name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
-          <FontAwesomeIcon onClick={()=>setVisible(!visible)} icon={visible ? faEyeSlash : faEye} className="eyePw"/>
-          <p>{errors.password && errors.password}</p>
-          </div>
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faImage}/>
-          <input className="inputForm" type="text" name="image" id="img" placeholder="Enter an url img" onChange={readInput}/>
-          <p>{errors.image && errors.image}</p>
-          </div>
-        <div className="inputIcon">
-        <FontAwesomeIcon className='iconForm' icon={faGlobeAmericas}/>
-          <select style={{textAlignLast: 'center'}} className="inputForm" name="country" id="country" onChange={readInput}>
-            <option value="choose" >Choose your country</option>
-            {countries.map(country => <option key={country.name} value={country.name}>{country.name}</option>)}
-          </select>
-          <p>{errors.country && 'You have to choose your country'}</p>
         </div>
-      </form>
-      <button className="createAcc" onClick={()=>validateInfo()}>Create Account</button>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faUser}/></div>
+          <div className="form">
+            <input type="text" name="lastname" required autoComplete="off" onChange={readInput}/>
+              <label className="labelInput" htmlFor="lastname">
+                {errors.lastname ?
+                <p>{errors.lastname && errors.lastname}</p>          
+                :
+                <span className="contentInput">Lastname</span>
+              }
+              </label>
+            </div>
+        </div>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faEnvelope}/></div>
+          <div className="form">
+            <input type="text" name="email" required autoComplete="off" onChange={readInput}/>
+            <label className="labelInput" htmlFor="email">
+              {errors.email ?
+              <p>{errors.email && errors.email}</p>
+              :
+              <span className="contentInput">Email</span>
+              }
+            </label>
+          </div>
+        </div>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faUserTie}/></div>
+          <div className="form">
+            <input type="text" name="username" required autoComplete="off" onChange={readInput}/>
+            <label className="labelInput" htmlFor="username">
+              {errors.username ?
+              <p>{errors.username && errors.username}</p>
+              :
+              <span className="contentInput">Username</span>
+              }
+            </label>
+          </div>
+        </div>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faKey}/></div>
+          <div className="form">
+            <input type={visible ? "text" : "password"} name="password" required autoComplete="off" onChange={readInput}/>
+            <label className="labelInput" htmlFor="password">
+              {errors.password ?
+              <p>{errors.password && errors.password}</p>
+              :
+              <span className="contentInput">Password</span>
+              }
+            </label>
+            <FontAwesomeIcon onClick={()=>setVisible(!visible)} icon={visible ? faEyeSlash : faEye} className="eyePw"/>      
+          </div>
+        </div>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faImage}/></div>
+          <div className="form">
+            <input type="text" name="image" required autoComplete="off" onChange={readInput}/>
+            <label className="labelInput" htmlFor="image">
+              {errors.image ?
+              <p>{errors.image && errors.image}</p>
+              :
+              <span className="contentInput">Image</span>
+              }
+            </label>
+          </div>
+        </div>
+        <div className="icon-input">
+          <div style={{color: '#1A73E8'}}><FontAwesomeIcon className='iconForm' icon={faGlobeAmericas}/></div>
+          <div className="form">
+            <select style={{textAlignLast: 'center'}} className="select" name="country" id="country" onChange={readInput}>
+              <option value="choose" >Choose your country</option>
+            {countries.map(country => <option key={country.name} value={country.name}>{country.name}</option>)}
+            </select>
+            <p className="pCountry">{errors.country && 'Please choose your country'}</p>
+          </div>
+        </div>
+        <button className="createAcc" onClick={()=>validateInfo()}>Create Account</button>
+        <h4>Or</h4>
+        <GoogleLogin className="googleBtn"
+                clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
+                buttonText="Sign up with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+              />     
+      </div>
     </div>
-    <GoogleLogin className="googleBtn"
+
+
+    
+    {/* <GoogleLogin className="googleBtn"
         clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
         buttonText="Sign up with Google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
       />
-    <Link to="/login"><h5 style={{textAlign: "center", color: '#1A73E8'}}>You already have an account? Log In!</h5></Link>
+    <Link to="/login"><h5 style={{textAlign: "center", color: '#1A73E8'}}>You already have an account? Log In!</h5></Link> */}
     </>
   )
 }

@@ -25,7 +25,6 @@ const Header = (props)=>{
       icon:'👋',
     })
   }
-  
   if(props.userLogged){
     var links = 
     <>

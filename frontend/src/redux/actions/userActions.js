@@ -34,16 +34,19 @@ const userActions = {
   },
 
   logInFromLS: (token) => {
+
     return async (dispatch, getState) => {
       try{
-        const response = await axios.post('http://localhost:4000/api/login/ls', {token}, {
+        const response = await axios.post('http://localhost:4000/api/login/ls', {token}, { // Se agrega el token, porque no se puede poner un .post sin cuerpo (donde esta el token)!
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
         dispatch({type: 'LOG_USER', payload: {response: {...response.data.response}}})
+        console.log(response)
       }catch(err){
         // Evalua el estado del error 401 (unauthorized)
+        console.log(err)
         if(err.response.status === 401) {
           toast.error("You are not allowed to access this page")
           localStorage.clear()

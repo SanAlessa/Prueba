@@ -1,7 +1,7 @@
 import {  useState } from "react"
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserTie, faKey, faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faKey, faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 import Header from "./Header"
 import { connect } from "react-redux"
 import userActions from "../redux/actions/userActions"
@@ -56,30 +56,54 @@ const LogIn = (props) => {
       <Header/>
     </div>
     <div className="borderPic"></div>
-    <div className="formContainer" >
-      <form className="signUpForm">
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faUserTie}/>
-          <input className="inputForm" type="text" name="email" id="un" placeholder="Enter your email" onChange={readInput}/>
-          <p>{errors &&  errors}</p>
+    <div style={{display: 'flex', position:'relative', marginBottom: '10vh', marginTop: '2vh'}}>
+      <div className="prueba2">
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '3vh', position: 'absolute', top: '35%'}} >
+          <h1 style={{color: 'white', marginBottom: '3vh', marginLeft: '1.5vw'}}>Don't have <br/> an account?</h1>
+          <Link to="/SignUp"><h2 style={{textAlign: "center", color: 'white', width: '8vw', border: '3px solid white'}}>Sign Up!</h2></Link>
+        </div>   
+      </div>
+      <div className="formContainer logIn" style={{position: 'absolute', backgroundColor: 'white', top: '0', left: '0', right: '0', bottom: '0', marginTop: '-0.2vh'}}>
+        <h1>Log In</h1>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faEnvelope}/></div>
+          <div className="form">
+            <input type="text" name="email" required onChange={readInput}/>
+            <label className="labelInput" htmlFor="email">
+              {errors ?
+              <p>{errors && errors}</p>
+              :
+              <span className="contentInput">Email</span>
+              }
+            </label>
           </div>
-        <div className="inputIcon">
-          <FontAwesomeIcon className='iconForm' icon={faKey}/>
-          <input className="inputForm" type={visible ? "text" : "password"} name="password" id="pw" placeholder="Enter your password" onChange={readInput}/>
-          <FontAwesomeIcon onClick={()=>setVisible(!visible)} icon={visible ? faEyeSlash : faEye} className="eyePw"/>
-          <p>{errors &&  errors}</p>
+        </div>
+        <div className="icon-input">
+          <div className="icon"><FontAwesomeIcon className='iconForm' icon={faKey}/></div>
+          <div className="form">
+            <input type={visible ? "text" : "password"} name="password" required onChange={readInput}/>
+            <label className="labelInput" htmlFor="password">
+              {errors ?
+              <p>{errors && errors}</p>
+              :
+              <span className="contentInput">Password</span>
+              }
+            </label>
+            <FontAwesomeIcon onClick={()=>setVisible(!visible)} icon={visible ? faEyeSlash : faEye} className="eyePw"/>      
           </div>
-      </form>
-      <button className="createAcc" onClick={()=>validateInfo()}>Sign In</button>
+        </div>
+        <button className="createAcc" onClick={()=>validateInfo()}>Log In</button>
+        <h4>Or</h4>
+        <GoogleLogin className="googleBtnLogIn"
+          clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
+          buttonText="Log In with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
+      </div>
     </div>
-      <GoogleLogin className="googleBtnLogIn"
-        clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
-        buttonText="Log In with Google"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-      />
-    <Link to="/signup"><h5 style={{textAlign:"center", color: '#1A73E8'}}>You don't have an account? Sign Up!</h5></Link>
+    {/* <Link to="/signup"><h5 style={{textAlign:"center", color: '#1A73E8'}}>You don't have an account? Sign Up!</h5></Link> */}
     </>
   )
 }

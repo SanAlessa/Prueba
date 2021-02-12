@@ -6,8 +6,8 @@ const userController = {
   signUp: async (req, res) => {
     var errors = []
     const {firstname, lastname, username, country, email, image, password, rol} = req.body
-    const userExists = await User.findOne({email: email})
-    if(userExists){
+    const emailExists = await User.findOne({email: email})
+    if(emailExists){
       var error = {context: {label: 'email'}, message: 'This email is already in use'}
       errors.push(error)
     }

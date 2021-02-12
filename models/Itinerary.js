@@ -13,7 +13,7 @@ const itinerarySchema = new mongoose.Schema({
     {image: {type: String, required: true}, title: {type: String, required: true}}
   ],
   comments: [
-    {userPic: String, userName: String, comment: String}
+    {userPic: String, userName: String, userLastname:String, comment: String, userId: String}
   ],
 }, {timestamps: true})
 
