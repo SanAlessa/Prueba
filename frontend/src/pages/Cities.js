@@ -5,6 +5,7 @@ import Preloader from '../components/Preloader'
 import NoCity from '../components/NoCity'
 import {connect} from 'react-redux'
 import cityActions from '../redux/actions/cityActions'
+import itinerariesActions from '../redux/actions/itinerariesActions'
 
 
 // Componente correspondiente a la pagina Cities que va a llamar a los respectivos componentes.
@@ -15,6 +16,7 @@ const Cities = (props) => {
   useEffect(()=>{
     getCities()
     window.scrollTo(0,0)
+    props.resetItineraries()
   },[getCities])
 
   // Funcion encargada de comparar si la data esta cargada o no y retorna el preloader. En caso de no haber ciudades devuelve un componente con una card especifica.
@@ -52,7 +54,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = {
   getCities: cityActions.getCities,
-  citiesFilter: cityActions.searchCities
+  citiesFilter: cityActions.searchCities,
+  resetItineraries: itinerariesActions.resetItineraries
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities)

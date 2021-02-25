@@ -21,6 +21,12 @@ const itineraryReducer = (state = initialState, action) => {
         ...state,
         itineraries: state.itineraries.map(itinerary => itinerary._id === action.payload.response._id ? action.payload.response : itinerary)
       }
+    case 'RESET':
+      return {
+        ...state,
+        itineraries: [],
+        loading: true
+      }
     default:
     return state
   }

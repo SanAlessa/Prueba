@@ -15,11 +15,16 @@ const itinerariesActions = {
     }
   },
 
+  resetItineraries: () => {
+    return (dispatch, getState) => {
+      console.log('Se ejecuta la accion')
+      dispatch({type: 'RESET'})
+    }
+  },
+
 
   addComment: (comment, token, id) => {
     return async (dispatch, getState) => {
-      console.log('en comment llega el :' +token)
-      getState()
       try {
         const response = await axios.post('http://localhost:4000/api/comments', {comment, id} , {
           headers: {
@@ -27,9 +32,7 @@ const itinerariesActions = {
           }
         })
         dispatch({type: 'COMMENT', payload: response.data})
-        console.log(response.data)
       }catch(error){
-        console.log(error)
         toast.error('Oops something went wrong, try again later!')
       }
     }

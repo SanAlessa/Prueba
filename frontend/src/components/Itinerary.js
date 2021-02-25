@@ -44,7 +44,7 @@ const Itinerary = (props) => {
     e.key==='Enter' && sendComment()
   }
 
-  const addLike =async ()=> {
+  const addLike = ()=> {
    props.like(_id, props.loggedUser.response.token)
   }
   const dislike =()=> {
