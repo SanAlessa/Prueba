@@ -11,7 +11,6 @@ import cityActions from '../redux/actions/cityActions'
 const Cities = (props) => {
   
   const {getCities} = props
-  
   useEffect(()=>{
     getCities()
     window.scrollTo(0,0)

@@ -18,7 +18,7 @@ import toast from 'react-hot-toast';
 const Header = (props)=>{
   const[isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  console.log(props.userLogged)
+  
   const logout =()=> {
     props.logOut()
     toast('See you later, alligator', {
