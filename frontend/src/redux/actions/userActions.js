@@ -5,7 +5,7 @@ const userActions = {
   createUser: (newUser)=> {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.post('http://localhost:4000/api/signup', newUser)
+        const response = await axios.post('https://alessandro-mytinerary.herokuapp.com/api/signup', newUser)
         if(!response.data.success){
           return response.data 
         }
@@ -21,7 +21,7 @@ const userActions = {
   logIn: (user) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.post('http://localhost:4000/api/login', user)
+        const response = await axios.post('https://alessandro-mytinerary.herokuapp.com/api/login', user)
         if(!response.data.success){
           return response.data
         }
@@ -37,7 +37,7 @@ const userActions = {
 
     return async (dispatch, getState) => {
       try{
-        const response = await axios.post('http://localhost:4000/api/login/ls', {token}, { // Se agrega el token, porque no se puede poner un .post sin cuerpo (donde esta el token)!
+        const response = await axios.post('https://alessandro-mytinerary.herokuapp.com/api/login/ls', {token}, { // Se agrega el token, porque no se puede poner un .post sin cuerpo (donde esta el token)!
           headers: {
             Authorization: `Bearer ${token}`
           }

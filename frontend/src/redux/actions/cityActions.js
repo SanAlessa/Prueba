@@ -4,7 +4,7 @@ const cityActions = {
   getCities: ()=> {
     return async (dispatch, getState) => {
       try {
-        const response = await fetch('http://localhost:4000/api/cities')
+        const response = await fetch('https://alessandro-mytinerary.herokuapp.com/api/cities')
         const data = await response.json()
         dispatch({type: 'GET_CITIES', payload: data.response})
       }catch(error) {

@@ -25,8 +25,6 @@ const City =(props)=> {
     setLoading(props.loadingReducer)
   }, [cities, id, getItineraries, props.history,props.loadingReducer])
 
-  // Funcion async donde incluyo la funcion que en su action tiene un pedido ajax, por ende tiene una promesa y esto me permite utilizar el estado de loadgin.
-
   const comparator=()=>{
     if(loading) {
       return <Preloader/>

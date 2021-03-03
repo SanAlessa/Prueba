@@ -6,7 +6,7 @@ const itinerariesActions = {
   getItineraries: (id) => {
     return async (dispatch, getState) => {
       try {
-        const response = await fetch('http://localhost:4000/api/itineraries/'+id)
+        const response = await fetch('https://alessandro-mytinerary.herokuapp.com/api/itineraries/'+id)
         const data = await response.json()
         dispatch({type: 'GET_ITINERARIES', payload: data.response})
       }catch(error){
@@ -21,7 +21,7 @@ const itinerariesActions = {
       console.log('en comment llega el :' +token)
       getState()
       try {
-        const response = await axios.post('http://localhost:4000/api/comments', {comment, id} , {
+        const response = await axios.post('https://alessandro-mytinerary.herokuapp.com/api/comments', {comment, id} , {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -38,7 +38,7 @@ const itinerariesActions = {
   updateComment: (comment, idComment, idItinerary, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.put('http://localhost:4000/api/comments/update', {comment, idComment, idItinerary}, {
+        const response = await axios.put('https://alessandro-mytinerary.herokuapp.com/api/comments/update', {comment, idComment, idItinerary}, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -54,7 +54,7 @@ const itinerariesActions = {
   deleteComment: (idComment, idItinerary, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.put('http://localhost:4000/api/comments', {idComment, idItinerary}, {
+        const response = await axios.put('https://alessandro-mytinerary.herokuapp.com/api/comments', {idComment, idItinerary}, {
           headers: {
             Authorization: 'Bearer '+ token
           }
@@ -70,7 +70,7 @@ const itinerariesActions = {
   like: (id, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.post('http://localhost:4000/api/likes', {id}, {
+        const response = await axios.post('https://alessandro-mytinerary.herokuapp.com/api/likes', {id}, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -85,7 +85,7 @@ const itinerariesActions = {
   dislike: (id, token) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.post('http://localhost:4000/api/dislike', {id}, {
+        const response = await axios.post('https://alessandro-mytinerary.herokuapp.com/api/dislike', {id}, {
           headers: {
             Authorization: 'Bearer ' +token
           }

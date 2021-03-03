@@ -94,16 +94,15 @@ const LogIn = (props) => {
         </div>
         <button className="createAcc" onClick={()=>validateInfo()}>Log In</button>
         <h4>Or</h4>
-        <GoogleLogin className="googleBtnLogIn"
+        {/* <GoogleLogin className="googleBtnLogIn"
           clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
           buttonText="Log In with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
-        />
+        /> */}
       </div>
     </div>
-    {/* <Link to="/signup"><h5 style={{textAlign:"center", color: '#1A73E8'}}>You don't have an account? Sign Up!</h5></Link> */}
     </>
   )
 }
