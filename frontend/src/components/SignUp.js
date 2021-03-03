@@ -175,13 +175,13 @@ const SignUp = (props) => {
         </div>
         <button className="createAcc" onClick={()=>validateInfo()}>Create Account</button>
         <h4>Or</h4>
-        {/* <GoogleLogin className="googleBtn"
+        <GoogleLogin className="googleBtn"
                 clientId="556912548524-tkvtubo3ao3tkkmv9vsk7bv7eevcdtbt.apps.googleusercontent.com"
                 buttonText="Sign up with Google"
                 onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onFailure={responseGoogle}git 
                 cookiePolicy={'single_host_origin'}
-              />      */}
+              />     
       </div>
     </div>
     </>
