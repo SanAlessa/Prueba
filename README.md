@@ -1,10 +1,10 @@
 # MyTinerary
 Aplicación web desarrollada con stack mern. Es una aplicación de viajes donde podremos ver diferentes ciudades del mundo y asociadas a las mismas habrá itinerarios con actividades para llevar a cabo
 # Trabajo realizado
-Para poder ver el trabajo final realizado puedes ingresar a: 
+Para poder ver el trabajo final realizado puedes ingresar a: https://alessandro-mytinerary.herokuapp.com
 # Construido con 🛠️
 - Node.js - Entorno de ejecución para JavaScript
-- Express - Infraestructura de la aplicacion web
+- Express - Libreria de Node utilizada en la construccion de la API
 - MongoDB - Base de datos utilizada
 - Mongoose - Modelado de objetos (Object Document Mapper (ODM))
 - Bcrypt - Librería para hashear contraseñas
